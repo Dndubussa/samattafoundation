@@ -1,0 +1,17 @@
+/* TEAM */
+Founder & Chairman: Mbwana Ally Samatta
+Organization: Samatta Foundation
+Location: Dar es Salaam, Tanzania
+Contact: info [at] samattafoundation.org
+
+/* SITE */
+Last update: 2024/12/14
+Standards: HTML5, CSS3, JavaScript ES6+
+Components: React, TypeScript, Tailwind CSS
+Software: Vite, Supabase
+Fonts: Montserrat, Inter
+
+/* MISSION */
+Empowering Tanzanian youth through sports, education, health awareness, and community development.
+Creating opportunities for the next generation to reach their full potential.
+

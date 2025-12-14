@@ -1,0 +1,262 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Samatta Foundation Design System */
+
+@layer base {
+  :root {
+    /* Core brand colors from logo */
+    --background: 220 30% 98%;
+    --foreground: 230 78% 15%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 230 78% 15%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 230 78% 15%;
+
+    /* Primary: Deep Royal Blue from logo */
+    --primary: 230 78% 24%;
+    --primary-foreground: 0 0% 100%;
+    --primary-light: 230 70% 45%;
+    --primary-glow: 230 78% 35%;
+
+    /* Secondary: Warm Gold/Amber for energy */
+    --secondary: 38 95% 55%;
+    --secondary-foreground: 230 78% 15%;
+    --secondary-light: 38 95% 70%;
+
+    --muted: 220 20% 94%;
+    --muted-foreground: 220 10% 45%;
+
+    --accent: 38 95% 55%;
+    --accent-foreground: 230 78% 15%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 220 20% 88%;
+    --input: 220 20% 88%;
+    --ring: 230 78% 24%;
+
+    --radius: 0.75rem;
+
+    /* Custom gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(230 78% 24%) 0%, hsl(230 70% 35%) 100%);
+    --gradient-secondary: linear-gradient(135deg, hsl(38 95% 55%) 0%, hsl(38 95% 65%) 100%);
+    --gradient-hero: linear-gradient(180deg, hsl(220 30% 98%) 0%, hsl(220 40% 95%) 100%);
+    --gradient-card: linear-gradient(180deg, hsl(0 0% 100%) 0%, hsl(220 30% 98%) 100%);
+
+    /* Shadows */
+    --shadow-sm: 0 2px 8px -2px hsl(230 78% 24% / 0.08);
+    --shadow-md: 0 8px 24px -8px hsl(230 78% 24% / 0.12);
+    --shadow-lg: 0 16px 48px -12px hsl(230 78% 24% / 0.18);
+    --shadow-glow: 0 0 40px hsl(38 95% 55% / 0.3);
+    --shadow-primary-glow: 0 8px 32px hsl(230 78% 24% / 0.25);
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    --background: 230 40% 8%;
+    --foreground: 220 20% 95%;
+
+    --card: 230 35% 12%;
+    --card-foreground: 220 20% 95%;
+
+    --popover: 230 35% 12%;
+    --popover-foreground: 220 20% 95%;
+
+    --primary: 230 70% 55%;
+    --primary-foreground: 0 0% 100%;
+    --primary-light: 230 70% 65%;
+    --primary-glow: 230 70% 45%;
+
+    --secondary: 38 95% 55%;
+    --secondary-foreground: 230 78% 15%;
+
+    --muted: 230 30% 18%;
+    --muted-foreground: 220 15% 60%;
+
+    --accent: 38 95% 55%;
+    --accent-foreground: 230 78% 15%;
+
+    --destructive: 0 62% 30%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 230 30% 20%;
+    --input: 230 30% 20%;
+    --ring: 230 70% 55%;
+
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-heading font-bold tracking-tight;
+  }
+}
+
+@layer utilities {
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary-light;
+  }
+
+  .animate-fade-in-up {
+    animation: fadeInUp 0.6s ease-out forwards;
+  }
+
+  .animate-fade-in {
+    animation: fadeIn 0.5s ease-out forwards;
+  }
+
+  .animate-scale-in {
+    animation: scaleIn 0.5s ease-out forwards;
+  }
+
+  .animate-slide-in-left {
+    animation: slideInLeft 0.6s ease-out forwards;
+  }
+
+  .animate-slide-in-right {
+    animation: slideInRight 0.6s ease-out forwards;
+  }
+
+  .hover-lift {
+    @apply transition-all duration-300 ease-out;
+  }
+
+  .hover-lift:hover {
+    @apply -translate-y-2 shadow-lg;
+  }
+
+  .hover-glow {
+    @apply transition-all duration-300 ease-out;
+  }
+
+  .hover-glow:hover {
+    box-shadow: var(--shadow-glow);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.animate-float {
+  animation: float 4s ease-in-out infinite;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+}
+
+.animate-slide-up {
+  animation: slideUp 0.5s ease-out forwards;
+}
+
+.animate-slide-down {
+  animation: slideDown 0.5s ease-out forwards;
+}
