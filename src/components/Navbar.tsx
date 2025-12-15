@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
-import samattaLogo from "@/assets/samatta-logo.png";
+import samattaLogo from "@/assets/SAMATTA FOUNDATION LOGO.png";
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -36,67 +36,143 @@ const Navbar = () => {
 
   return (
     <nav
-      className="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-card/95 backdrop-blur-md shadow-md"
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+        isScrolled 
+          ? 'bg-white/95 backdrop-blur-xl shadow-lg border-b border-primary/10' 
+          : 'bg-white/90 backdrop-blur-md shadow-md'
+      }`}
     >
-      <div className="container mx-auto px-4 flex items-center justify-between">
-        <a
-          href="/"
-          className="flex items-center gap-3 group"
-          onClick={handleLogoClick}
-        >
-          <img
-            src={samattaLogo}
-            alt="Samatta Foundation"
-            className="w-auto h-20 transition-all duration-300 group-hover:scale-105"
-          />
-        </a>
+      {/* Gradient Border */}
+      <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-primary/50 to-transparent" />
+      
+      <div className="container mx-auto px-6">
+        <div className="flex items-center justify-between py-2">
+          {/* Logo */}
+          <a
+            href="/"
+            className="flex items-center gap-4 group relative"
+            onClick={handleLogoClick}
+          >
+            <div className="relative">
+              <div className="absolute -inset-2 bg-gradient-to-r from-primary/20 to-sky-500/20 rounded-xl opacity-0 group-hover:opacity-100 blur transition-all duration-500" />
+              <img
+                src={samattaLogo}
+                alt="Samatta Foundation"
+                className="w-auto h-16 relative z-10 transition-all duration-500 group-hover:scale-105 drop-shadow-lg"
+              />
+            </div>
+            {/* Foundation Name */}
+            <div className="hidden sm:flex flex-col">
+              <span className="font-heading text-xl font-bold text-foreground leading-tight tracking-tight">
+                Samatta Foundation
+              </span>
+              <span className="text-xs font-medium text-primary/70 tracking-wide uppercase">
+                Empowering Youth
+              </span>
+            </div>
+          </a>
 
-        {/* Desktop Navigation */}
-        <div className="hidden md:flex items-center gap-8">
-          {navLinks.map((link) => (
-            <Link
-              key={link.label}
-              to={link.href}
-              className="text-foreground/80 hover:text-primary font-medium transition-colors duration-200 relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-secondary after:transition-all after:duration-300 hover:after:w-full"
-            >
-              {link.label}
-            </Link>
-          ))}
-          <Button variant="hero" size="default" asChild>
-            <Link to="/donate">Donate Now</Link>
-          </Button>
+          {/* Desktop Navigation */}
+          <div className="hidden md:flex items-center gap-2">
+            {navLinks.map((link) => {
+              const isActive = location.pathname === link.href;
+              return (
+                <Link
+                  key={link.label}
+                  to={link.href}
+                  className={`relative px-4 py-2 font-semibold text-sm transition-all duration-300 group ${
+                    isActive 
+                      ? 'text-primary' 
+                      : 'text-foreground/70 hover:text-primary'
+                  }`}
+                >
+                  <span className="relative z-10">{link.label}</span>
+                  {/* Hover Background */}
+                  <div className={`absolute inset-0 rounded-lg transition-all duration-300 ${
+                    isActive 
+                      ? 'bg-primary/10 scale-100' 
+                      : 'bg-primary/5 scale-0 group-hover:scale-100'
+                  }`} />
+                  {/* Active Indicator */}
+                  {isActive && (
+                    <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1/2 h-0.5 bg-gradient-to-r from-primary to-sky-500 rounded-full" />
+                  )}
+                  {/* Hover Underline */}
+                  <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-primary to-sky-500 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left rounded-full" />
+                </Link>
+              );
+            })}
+            
+            {/* CTA Button */}
+            <div className="ml-4 relative group">
+              <div className="absolute -inset-1 bg-gradient-to-r from-primary to-sky-500 rounded-lg opacity-70 group-hover:opacity-100 blur transition-all duration-300" />
+              <Button variant="hero" size="default" className="relative shadow-lg" asChild>
+                <Link to="/donate">
+                  <span className="flex items-center gap-2">
+                    Donate Now
+                    <span className="text-lg">❤️</span>
+                  </span>
+                </Link>
+              </Button>
+            </div>
+          </div>
+
+          {/* Mobile Menu Button */}
+          <button
+            className="md:hidden p-2.5 rounded-lg bg-primary/5 hover:bg-primary/10 text-primary transition-all duration-300 hover:scale-105"
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            aria-label="Toggle menu"
+          >
+            {isMobileMenuOpen ? (
+              <X size={24} className="transition-transform duration-300 rotate-90" />
+            ) : (
+              <Menu size={24} className="transition-transform duration-300" />
+            )}
+          </button>
         </div>
-
-        {/* Mobile Menu Button */}
-        <button
-          className="md:hidden p-2 text-foreground"
-          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          aria-label="Toggle menu"
-        >
-          {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-        </button>
       </div>
 
       {/* Mobile Menu */}
       <div
-        className={`md:hidden absolute top-full left-0 right-0 bg-card/98 backdrop-blur-lg shadow-lg transition-all duration-300 overflow-hidden ${
-          isMobileMenuOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
+        className={`md:hidden absolute top-full left-0 right-0 bg-white/98 backdrop-blur-2xl border-b border-primary/10 shadow-2xl transition-all duration-500 overflow-hidden ${
+          isMobileMenuOpen ? "max-h-screen opacity-100" : "max-h-0 opacity-0"
         }`}
       >
-        <div className="container mx-auto px-4 py-4 flex flex-col gap-4">
-          {navLinks.map((link) => (
-            <Link
-              key={link.label}
-              to={link.href}
-              className="text-foreground/80 hover:text-primary font-medium py-2 transition-colors"
-              onClick={() => setIsMobileMenuOpen(false)}
-            >
-              {link.label}
-            </Link>
-            ))}
-          <Button variant="hero" size="default" className="mt-2" asChild>
-            <Link to="/donate">Donate Now</Link>
-          </Button>
+        <div className="container mx-auto px-6 py-6">
+          <div className="flex flex-col gap-2">
+            {navLinks.map((link, index) => {
+              const isActive = location.pathname === link.href;
+              return (
+                <Link
+                  key={link.label}
+                  to={link.href}
+                  className={`px-4 py-3 rounded-lg font-semibold transition-all duration-300 ${
+                    isActive 
+                      ? 'bg-primary/10 text-primary' 
+                      : 'text-foreground/70 hover:bg-primary/5 hover:text-primary'
+                  }`}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  style={{ animationDelay: `${index * 50}ms` }}
+                >
+                  <span className="flex items-center justify-between">
+                    {link.label}
+                    {isActive && <span className="text-primary">•</span>}
+                  </span>
+                </Link>
+              );
+            })}
+            
+            <div className="mt-4 pt-4 border-t border-primary/10">
+              <Button variant="hero" size="lg" className="w-full shadow-lg" asChild>
+                <Link to="/donate" onClick={() => setIsMobileMenuOpen(false)}>
+                  <span className="flex items-center justify-center gap-2">
+                    Donate Now
+                    <span className="text-lg">❤️</span>
+                  </span>
+                </Link>
+              </Button>
+            </div>
+          </div>
         </div>
       </div>
     </nav>

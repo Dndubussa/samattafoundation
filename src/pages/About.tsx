@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight, Heart, Target, Users, Trophy } from "lucide-react";
 import { Link } from "react-router-dom";
 import SEO from "@/components/SEO";
-import event6 from "@/assets/gallery/event-6.jpg";
+import founderImage from "@/assets/SAMATTA.jpg";
 
 const About = () => {
   return (
@@ -36,7 +36,7 @@ const About = () => {
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className="animate-fade-in-up">
               <img
-                src={event6}
+                src={founderImage}
                 alt="Mbwana Ally Samatta"
                 className="rounded-2xl shadow-2xl w-full"
               />

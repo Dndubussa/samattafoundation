@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight, Trophy, GraduationCap, Heart, Users, Calendar, MapPin } from "lucide-react";
 import { Link } from "react-router-dom";
 import SEO from "@/components/SEO";
+import samattaCupImage from "@/assets/NISHATI SAFI CUP.jpg";
 import event1 from "@/assets/gallery/event-1.jpg";
 import event3 from "@/assets/gallery/event-3.jpg";
 import event4 from "@/assets/gallery/event-4.jpg";
@@ -113,12 +114,12 @@ const Programs = () => {
               </div>
               <div className="relative">
                 <img
-                  src={event1}
+                  src={samattaCupImage}
                   alt="Samatta Cup"
                   className="rounded-2xl shadow-2xl w-full"
                 />
                 <div className="absolute -bottom-6 -right-6 bg-secondary text-secondary-foreground p-6 rounded-2xl shadow-xl">
-                  <div className="text-3xl font-heading font-bold">2024</div>
+                  <div className="text-3xl font-heading font-bold">2026</div>
                   <div className="text-sm">Coming Soon</div>
                 </div>
               </div>

@@ -1,5 +1,5 @@
 import { Facebook, Instagram, Twitter, Youtube, Mail, MapPin, Phone } from "lucide-react";
-import samattaLogo from "@/assets/samatta-logo.png";
+import samattaLogo from "@/assets/SAMATTA FOUNDATION LOGO.png";
 import NewsletterSignup from "./NewsletterSignup";
 
 const Footer = () => {
