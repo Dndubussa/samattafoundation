@@ -1,5 +1,5 @@
 import { Facebook, Instagram, Twitter, Youtube, Mail, MapPin, Phone } from "lucide-react";
-import samattaLogo from "@/assets/samatta-logo.jpg";
+import samattaLogo from "@/assets/samatta-logo.png";
 import NewsletterSignup from "./NewsletterSignup";
 
 const Footer = () => {
@@ -46,7 +46,7 @@ const Footer = () => {
             <img
               src={samattaLogo}
               alt="Samatta Foundation"
-              className="h-12 w-auto mb-3 rounded-lg bg-primary-foreground p-2"
+              className="h-16 w-auto mb-3 rounded-lg bg-primary-foreground p-2"
             />
             <p className="text-primary-foreground/70 mb-3 leading-relaxed text-sm">
               Empowering youth and communities in Tanzania through sports, 

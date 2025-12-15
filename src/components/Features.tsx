@@ -7,6 +7,7 @@ const features = [
     description:
       "Organizing football tournaments, talent identification, and life-skills training through sport—fostering discipline, leadership, and teamwork.",
     color: "from-secondary to-secondary-light",
+    image: "/src/assets/SAMATTA (9).jpg",
   },
   {
     icon: GraduationCap,
@@ -14,6 +15,7 @@ const features = [
     description:
       "Providing education awareness initiatives and support for school-going children from vulnerable backgrounds while encouraging academic excellence.",
     color: "from-primary to-primary-light",
+    image: "/src/assets/SAMATTA (10).jpg",
   },
   {
     icon: Heart,
@@ -21,6 +23,7 @@ const features = [
     description:
       "Running health awareness campaigns and community outreach programs promoting healthy lifestyles for vulnerable children and families.",
     color: "from-secondary to-secondary-light",
+    image: "/src/assets/SAMATTA (11).jpg",
   },
   {
     icon: Users,
@@ -28,17 +31,19 @@ const features = [
     description:
       "Advocating for marginalized groups including children with disabilities and people with albinism, promoting equal participation.",
     color: "from-primary to-primary-light",
+    image: "/src/assets/SAMATTA (8).jpg",
   },
 ];
 
 const Features = () => {
   return (
-    <section id="programs" className="py-24 bg-muted/30 relative overflow-hidden">
+    <section id="programs" className="py-20 bg-gradient-to-b from-background via-muted/20 to-background relative overflow-hidden">
       {/* Background Decorations */}
-      <div className="absolute top-0 right-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
-      <div className="absolute bottom-0 left-0 w-80 h-80 bg-secondary/5 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2" />
+      <div className="absolute top-1/4 right-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
+      <div className="absolute bottom-1/4 left-0 w-80 h-80 bg-sky-500/5 rounded-full blur-3xl" />
 
       <div className="container mx-auto px-4 relative z-10">
+        {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
           <span className="inline-block px-4 py-1.5 rounded-full bg-primary/10 text-primary font-semibold text-sm mb-4">
             Our Focus Areas
@@ -52,32 +57,59 @@ const Features = () => {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        {/* Features Flow */}
+        <div className="max-w-6xl mx-auto space-y-16">
           {features.map((feature, index) => (
             <div
               key={feature.title}
-              className="group relative bg-card rounded-2xl p-8 shadow-sm hover:shadow-lg transition-all duration-500 hover:-translate-y-2 border border-border/50"
-              style={{ animationDelay: `${index * 0.1}s` }}
+              className={`group flex flex-col ${
+                index % 2 === 1 ? 'md:flex-row-reverse' : 'md:flex-row'
+              } items-center gap-8 md:gap-12 transition-all duration-500`}
             >
-              {/* Icon */}
-              <div
-                className={`inline-flex items-center justify-center w-14 h-14 rounded-xl bg-gradient-to-br ${feature.color} mb-6 shadow-md group-hover:scale-110 transition-transform duration-300`}
-              >
-                <feature.icon className="w-7 h-7 text-primary-foreground" />
+              {/* Image Section */}
+              <div className="flex-shrink-0 w-full md:w-2/5">
+                <div className="relative overflow-hidden rounded-2xl shadow-lg group-hover:shadow-2xl transition-all duration-500">
+                  <img
+                    src={feature.image}
+                    alt={feature.title}
+                    className="w-full h-64 md:h-80 object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                  {/* Icon Overlay */}
+                  <div className="absolute top-4 right-4">
+                    <div
+                      className={`inline-flex items-center justify-center w-16 h-16 rounded-xl bg-gradient-to-br ${feature.color} shadow-lg backdrop-blur-sm bg-opacity-95`}
+                    >
+                      <feature.icon className="w-8 h-8 text-primary-foreground" />
+                    </div>
+                  </div>
+                  {/* Gradient Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                </div>
               </div>
 
-              {/* Content */}
-              <h3 className="text-xl font-heading font-bold text-foreground mb-3">
-                {feature.title}
-              </h3>
-              <p className="text-muted-foreground leading-relaxed">
-                {feature.description}
-              </p>
-
-              {/* Hover Accent */}
-              <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-secondary to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-b-2xl" />
+              {/* Content Section */}
+              <div className="flex-1 space-y-4">
+                <div>
+                  <h3 className="text-2xl md:text-3xl font-heading font-bold text-foreground group-hover:text-primary transition-colors duration-300 mb-3">
+                    {feature.title}
+                  </h3>
+                  <p className="text-muted-foreground text-base md:text-lg leading-relaxed">
+                    {feature.description}
+                  </p>
+                </div>
+                
+                {/* Progress Line */}
+                <div className="pt-2">
+                  <div className="h-1 w-0 group-hover:w-32 bg-gradient-to-r from-primary to-sky-500 transition-all duration-700 rounded-full" />
+                </div>
+              </div>
             </div>
           ))}
+        </div>
+
+        {/* Bottom Accent Line */}
+        <div className="mt-16 max-w-3xl mx-auto">
+          <div className="h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
         </div>
       </div>
     </section>
