@@ -29,11 +29,15 @@ const steps = [
 
 const HowItWorks = () => {
   return (
-    <section id="about" className="py-24 bg-card relative overflow-hidden">
+    <section id="about" className="py-24 bg-gradient-to-b from-blue-50/40 via-sky-50/30 to-blue-50/40 relative overflow-hidden">
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-[0.02]">
         <div className="absolute inset-0" style={{ backgroundImage: "radial-gradient(circle at 1px 1px, currentColor 1px, transparent 0)", backgroundSize: "40px 40px" }} />
       </div>
+      
+      {/* Background Decorations */}
+      <div className="absolute top-0 right-1/4 w-72 h-72 bg-blue-300/10 rounded-full blur-3xl" />
+      <div className="absolute bottom-0 left-1/4 w-80 h-80 bg-sky-300/10 rounded-full blur-3xl" />
 
       <div className="container mx-auto px-4 relative z-10">
         <div className="text-center max-w-3xl mx-auto mb-16">

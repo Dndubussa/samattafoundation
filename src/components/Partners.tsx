@@ -3,8 +3,10 @@ import gbbLogo from "@/assets/partners/gbb-insurance.jpeg";
 import asasLogo from "@/assets/partners/asas.png";
 import oryxLogo from "@/assets/partners/oryx-energies.png";
 import sofascoreLogo from "@/assets/partners/sofascore.png";
+import governmentLogo from "@/assets/partners/Government.jpeg";
 
 const partners = [
+  { name: "Government of Tanzania", logo: governmentLogo },
   { name: "Chap Chap Point", logo: chapchapLogo },
   { name: "GBB Insurance", logo: gbbLogo },
   { name: "ASAS", logo: asasLogo },
@@ -17,8 +19,12 @@ const Partners = () => {
   const duplicatedPartners = [...partners, ...partners];
 
   return (
-    <section className="py-16 bg-muted/30 overflow-hidden">
-      <div className="container mx-auto px-4 mb-10">
+    <section className="py-16 bg-gradient-to-b from-blue-50/20 via-sky-50/10 to-blue-50/20 overflow-hidden relative">
+      {/* Background Decorations */}
+      <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-64 h-64 bg-blue-300/10 rounded-full blur-3xl" />
+      <div className="absolute top-1/2 right-1/4 -translate-y-1/2 w-72 h-72 bg-sky-300/10 rounded-full blur-3xl" />
+      
+      <div className="container mx-auto px-4 mb-10 relative z-10">
         <h2 className="text-center text-lg font-medium text-muted-foreground uppercase tracking-wider">
           Our Partners & Sponsors
         </h2>

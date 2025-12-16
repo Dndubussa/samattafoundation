@@ -18,10 +18,10 @@ const Footer = () => {
   ];
 
   const programs = [
-    { label: "Samatta Cup", href: "#" },
-    { label: "Youth Development", href: "#" },
-    { label: "Education Support", href: "#" },
-    { label: "Community Outreach", href: "#" },
+    { label: "Samatta Cup", href: "/programs" },
+    { label: "Youth Development", href: "/programs" },
+    { label: "Education Support", href: "/programs" },
+    { label: "Community Outreach", href: "/programs" },
   ];
 
   return (
@@ -119,11 +119,19 @@ const Footer = () => {
                   info@samattafoundation.org
                 </a>
               </li>
-              <li className="flex items-center gap-2">
-                <Phone className="w-4 h-4 text-secondary shrink-0" />
-                <span className="text-primary-foreground/70 text-sm">
-                  +255 XXX XXX XXX
-                </span>
+              <li className="flex items-start gap-2">
+                <Phone className="w-4 h-4 text-secondary mt-0.5 shrink-0" />
+                <div className="flex flex-col gap-1">
+                  <a href="tel:+255712131079" className="text-primary-foreground/70 hover:text-secondary transition-colors text-sm">
+                    +255 712 131 079
+                  </a>
+                  <a href="tel:+255746411477" className="text-primary-foreground/70 hover:text-secondary transition-colors text-sm">
+                    +255 746 411 477
+                  </a>
+                  <a href="tel:+255656919595" className="text-primary-foreground/70 hover:text-secondary transition-colors text-sm">
+                    +255 656 919 595
+                  </a>
+                </div>
               </li>
             </ul>
           </div>
@@ -135,10 +143,10 @@ const Footer = () => {
             © {new Date().getFullYear()} Samatta Foundation. All rights reserved.
           </p>
           <div className="flex gap-6 text-sm">
-            <a href="#" className="text-primary-foreground/50 hover:text-secondary transition-colors">
+            <a href="/privacy" className="text-primary-foreground/50 hover:text-secondary transition-colors">
               Privacy Policy
             </a>
-            <a href="#" className="text-primary-foreground/50 hover:text-secondary transition-colors">
+            <a href="/terms" className="text-primary-foreground/50 hover:text-secondary transition-colors">
               Terms of Service
             </a>
           </div>

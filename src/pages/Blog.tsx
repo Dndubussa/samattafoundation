@@ -59,8 +59,12 @@ const Blog = () => {
       </section>
 
       {/* Blog Posts */}
-      <section className="py-20 bg-background">
-        <div className="container mx-auto px-4">
+      <section className="py-20 bg-gradient-to-br from-blue-50/30 via-sky-50/20 to-background relative overflow-hidden">
+        {/* Background Decorations */}
+        <div className="absolute top-1/4 right-0 w-96 h-96 bg-blue-300/10 rounded-full blur-3xl" />
+        <div className="absolute bottom-1/4 left-0 w-80 h-80 bg-sky-300/10 rounded-full blur-3xl" />
+        
+        <div className="container mx-auto px-4 relative z-10">
           {isLoading ? (
             <div className="text-center py-12">
               <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto"></div>

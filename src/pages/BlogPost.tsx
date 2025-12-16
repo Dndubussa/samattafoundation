@@ -100,8 +100,12 @@ const BlogPost = () => {
       )}
 
       {/* Article Content */}
-      <article className="py-12 bg-background">
-        <div className="container mx-auto px-4">
+      <article className="py-12 bg-gradient-to-b from-blue-50/20 via-sky-50/10 to-background relative overflow-hidden">
+        {/* Background Decorations */}
+        <div className="absolute top-1/4 right-0 w-96 h-96 bg-blue-300/10 rounded-full blur-3xl" />
+        <div className="absolute bottom-1/4 left-0 w-80 h-80 bg-sky-300/10 rounded-full blur-3xl" />
+        
+        <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-4xl mx-auto">
             {/* Category */}
             {post.category && (

@@ -9,7 +9,7 @@ import SEO from "@/components/SEO";
 
 const Index = () => {
   return (
-    <div className="min-h-screen bg-background overflow-x-hidden">
+    <div className="min-h-screen bg-gradient-to-b from-background via-blue-50/20 to-background overflow-x-hidden">
       <SEO />
       <main>
         <Hero />

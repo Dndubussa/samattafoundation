@@ -166,7 +166,7 @@ const DonationForm = () => {
             onChange={handleChange}
             required={!formData.is_anonymous}
             disabled={formData.is_anonymous}
-            placeholder="John Doe"
+            placeholder="Enter your full name"
             className="h-12"
           />
         </div>
@@ -183,7 +183,7 @@ const DonationForm = () => {
             value={formData.donor_email}
             onChange={handleChange}
             required
-            placeholder="john@example.com"
+            placeholder="Enter your email address"
             className="h-12"
           />
         </div>
@@ -197,7 +197,7 @@ const DonationForm = () => {
           type="tel"
           value={formData.donor_phone}
           onChange={handleChange}
-          placeholder="+255 XXX XXX XXX"
+          placeholder="Enter your phone number"
           className="h-12"
         />
       </div>
@@ -209,7 +209,7 @@ const DonationForm = () => {
           name="message"
           value={formData.message}
           onChange={handleChange}
-          placeholder="Share a message or dedication..."
+          placeholder="Enter your message or dedication (optional)"
           className="min-h-[100px] resize-none"
         />
       </div>

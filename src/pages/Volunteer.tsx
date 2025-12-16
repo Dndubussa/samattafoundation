@@ -157,8 +157,12 @@ const Volunteer = () => {
       </section>
 
       {/* Registration Form */}
-      <section className="py-20 bg-background">
-        <div className="container mx-auto px-4">
+      <section className="py-20 bg-gradient-to-br from-blue-50/30 via-sky-50/20 to-background relative overflow-hidden">
+        {/* Background Decorations */}
+        <div className="absolute top-20 right-10 w-96 h-96 bg-blue-300/10 rounded-full blur-3xl" />
+        <div className="absolute bottom-20 left-10 w-80 h-80 bg-sky-300/10 rounded-full blur-3xl" />
+        
+        <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-4xl mx-auto">
             <div className="bg-card p-8 md:p-12 rounded-2xl shadow-lg">
               <h2 className="font-heading text-3xl font-bold text-foreground mb-8">
@@ -277,7 +281,7 @@ const Volunteer = () => {
                         name="location"
                         value={formData.location}
                         onChange={handleChange}
-                        placeholder="City, Region"
+                        placeholder="Enter your city and region"
                         className="h-12"
                       />
                     </div>
@@ -298,7 +302,7 @@ const Volunteer = () => {
                       name="skills"
                       value={formData.skills}
                       onChange={handleChange}
-                      placeholder="What skills can you bring? (e.g., coaching, teaching, marketing, photography)"
+                      placeholder="Enter your skills and expertise"
                       className="min-h-[80px] resize-none"
                     />
                   </div>
@@ -310,7 +314,7 @@ const Volunteer = () => {
                       name="interests"
                       value={formData.interests}
                       onChange={handleChange}
-                      placeholder="Which programs are you most interested in? (e.g., sports development, education, health)"
+                      placeholder="Enter your areas of interest"
                       className="min-h-[80px] resize-none"
                     />
                   </div>
@@ -322,7 +326,7 @@ const Volunteer = () => {
                       name="availability"
                       value={formData.availability}
                       onChange={handleChange}
-                      placeholder="When are you available to volunteer? (e.g., weekends, evenings, specific days)"
+                      placeholder="Enter your availability schedule"
                       className="min-h-[80px] resize-none"
                     />
                   </div>
@@ -334,7 +338,7 @@ const Volunteer = () => {
                       name="experience"
                       value={formData.experience}
                       onChange={handleChange}
-                      placeholder="Tell us about any previous volunteer or community work experience"
+                      placeholder="Enter your previous volunteer experience"
                       className="min-h-[100px] resize-none"
                     />
                   </div>
@@ -347,7 +351,7 @@ const Volunteer = () => {
                       value={formData.why_volunteer}
                       onChange={handleChange}
                       required
-                      placeholder="Share your motivation for volunteering with the Samatta Foundation"
+                      placeholder="Enter your motivation for volunteering"
                       className="min-h-[120px] resize-none"
                     />
                   </div>

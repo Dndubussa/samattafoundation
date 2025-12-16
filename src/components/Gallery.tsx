@@ -40,8 +40,12 @@ const galleryImages = [
 
 const Gallery = () => {
   return (
-    <section className="py-20 bg-background">
-      <div className="container mx-auto px-4">
+    <section className="py-20 bg-gradient-to-br from-sky-50/30 via-blue-50/20 to-cyan-50/30 relative overflow-hidden">
+      {/* Background Decorations */}
+      <div className="absolute top-1/3 -right-20 w-96 h-96 bg-blue-400/10 rounded-full blur-3xl" />
+      <div className="absolute bottom-1/3 -left-20 w-80 h-80 bg-cyan-400/10 rounded-full blur-3xl" />
+      
+      <div className="container mx-auto px-4 relative z-10">
         {/* Section Header */}
         <div className="text-center mb-12 animate-fade-in-up">
           <span className="inline-block px-4 py-1.5 bg-secondary/10 text-secondary rounded-full text-sm font-medium mb-4">

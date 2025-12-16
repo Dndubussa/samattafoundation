@@ -118,8 +118,12 @@ const Apply = () => {
       </section>
 
       {/* Application Form */}
-      <section className="py-20 bg-background">
-        <div className="container mx-auto px-4">
+      <section className="py-20 bg-gradient-to-br from-blue-50/30 via-sky-50/20 to-background relative overflow-hidden">
+        {/* Background Decorations */}
+        <div className="absolute top-20 right-10 w-96 h-96 bg-blue-300/10 rounded-full blur-3xl" />
+        <div className="absolute bottom-20 left-10 w-80 h-80 bg-sky-300/10 rounded-full blur-3xl" />
+        
+        <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-4xl mx-auto">
             <div className="bg-card p-8 md:p-12 rounded-2xl shadow-lg">
               <div className="mb-8">
@@ -175,7 +179,7 @@ const Apply = () => {
                       value={formData.applicant_name}
                       onChange={handleChange}
                       required
-                      placeholder="Participant's full name"
+                      placeholder="Enter participant's full name"
                       className="h-12"
                     />
                   </div>
@@ -289,7 +293,7 @@ const Apply = () => {
                         name="grade_level"
                         value={formData.grade_level}
                         onChange={handleChange}
-                        placeholder="e.g., Grade 10, Form 4"
+                        placeholder="Enter grade or level"
                         className="h-12"
                       />
                     </div>
@@ -302,7 +306,7 @@ const Apply = () => {
                       name="sports_experience"
                       value={formData.sports_experience}
                       onChange={handleChange}
-                      placeholder="Tell us about your sports background, teams you've played for, positions, etc."
+                      placeholder="Enter your sports experience and background"
                       className="min-h-[120px] resize-none"
                     />
                   </div>
@@ -321,7 +325,7 @@ const Apply = () => {
                       name="medical_conditions"
                       value={formData.medical_conditions}
                       onChange={handleChange}
-                      placeholder="Please list any medical conditions, allergies, or special requirements we should be aware of"
+                      placeholder="Enter any medical conditions or allergies"
                       className="min-h-[100px] resize-none"
                     />
                   </div>
@@ -333,7 +337,7 @@ const Apply = () => {
                       name="additional_info"
                       value={formData.additional_info}
                       onChange={handleChange}
-                      placeholder="Any additional information you'd like to share"
+                      placeholder="Enter any additional information"
                       className="min-h-[100px] resize-none"
                     />
                   </div>

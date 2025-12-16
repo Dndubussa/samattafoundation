@@ -66,8 +66,12 @@ const Programs = () => {
       </section>
 
       {/* Featured Program - Samatta Cup */}
-      <section className="py-20 bg-background">
-        <div className="container mx-auto px-4">
+      <section className="py-20 bg-gradient-to-br from-blue-50/30 via-sky-50/20 to-background relative overflow-hidden">
+        {/* Background Decorations */}
+        <div className="absolute top-1/4 right-10 w-96 h-96 bg-blue-300/10 rounded-full blur-3xl" />
+        <div className="absolute bottom-1/4 left-10 w-80 h-80 bg-sky-300/10 rounded-full blur-3xl" />
+        
+        <div className="container mx-auto px-4 relative z-10">
           <div className="bg-gradient-to-br from-secondary/10 to-primary/5 rounded-3xl p-8 md:p-12 animate-fade-in-up">
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               <div>
