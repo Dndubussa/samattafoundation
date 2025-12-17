@@ -134,7 +134,7 @@ const Navbar = () => {
 
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
-        <div className="md:hidden absolute top-full left-0 right-0 bg-white/98 backdrop-blur-2xl border-b border-primary/10 shadow-2xl animate-fade-in-up z-40">
+        <div className="md:hidden absolute top-full left-0 right-0 bg-white backdrop-blur-xl border-b border-primary/10 shadow-2xl animate-fade-in-up z-40">
           <div className="container mx-auto px-6 py-6">
             <div className="flex flex-col gap-2">
               {navLinks.map((link, index) => {
