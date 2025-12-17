@@ -133,48 +133,46 @@ const Navbar = () => {
       </div>
 
       {/* Mobile Menu */}
-      <div
-        className={`md:hidden absolute top-full left-0 right-0 bg-white/98 backdrop-blur-2xl border-b border-primary/10 shadow-2xl transition-all duration-500 overflow-hidden ${
-          isMobileMenuOpen ? "max-h-screen opacity-100" : "max-h-0 opacity-0"
-        }`}
-      >
-        <div className="container mx-auto px-6 py-6">
-          <div className="flex flex-col gap-2">
-            {navLinks.map((link, index) => {
-              const isActive = location.pathname === link.href;
-              return (
-                <Link
-                  key={link.label}
-                  to={link.href}
-                  className={`px-4 py-3 rounded-lg font-semibold transition-all duration-300 ${
-                    isActive 
-                      ? 'bg-primary/10 text-primary' 
-                      : 'text-foreground/70 hover:bg-primary/5 hover:text-primary'
-                  }`}
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  style={{ animationDelay: `${index * 50}ms` }}
-                >
-                  <span className="flex items-center justify-between">
-                    {link.label}
-                    {isActive && <span className="text-primary">•</span>}
-                  </span>
-                </Link>
-              );
-            })}
-            
-            <div className="mt-4 pt-4 border-t border-primary/10">
-              <Button variant="hero" size="lg" className="w-full shadow-lg" asChild>
-                <Link to="/donate" onClick={() => setIsMobileMenuOpen(false)}>
-                  <span className="flex items-center justify-center gap-2">
-                    Donate Now
-                    <span className="text-lg">❤️</span>
-                  </span>
-                </Link>
-              </Button>
+      {isMobileMenuOpen && (
+        <div className="md:hidden absolute top-full left-0 right-0 bg-white/98 backdrop-blur-2xl border-b border-primary/10 shadow-2xl animate-fade-in-up z-40">
+          <div className="container mx-auto px-6 py-6">
+            <div className="flex flex-col gap-2">
+              {navLinks.map((link, index) => {
+                const isActive = location.pathname === link.href;
+                return (
+                  <Link
+                    key={link.label}
+                    to={link.href}
+                    className={`px-4 py-3 rounded-lg font-semibold transition-all duration-300 ${
+                      isActive 
+                        ? 'bg-primary/10 text-primary' 
+                        : 'text-foreground/70 hover:bg-primary/5 hover:text-primary'
+                    }`}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    style={{ animationDelay: `${index * 50}ms` }}
+                  >
+                    <span className="flex items-center justify-between">
+                      {link.label}
+                      {isActive && <span className="text-primary">•</span>}
+                    </span>
+                  </Link>
+                );
+              })}
+              
+              <div className="mt-4 pt-4 border-t border-primary/10">
+                <Button variant="hero" size="lg" className="w-full shadow-lg" asChild>
+                  <Link to="/donate" onClick={() => setIsMobileMenuOpen(false)}>
+                    <span className="flex items-center justify-center gap-2">
+                      Donate Now
+                      <span className="text-lg">❤️</span>
+                    </span>
+                  </Link>
+                </Button>
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      )}
     </nav>
   );
 };
