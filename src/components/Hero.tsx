@@ -51,7 +51,7 @@ const Hero = () => {
               {[
                 { value: "5,000+", label: "Youth Impacted" },
                 { value: "50+", label: "Communities" },
-                { value: "20+", label: "Programs" },
+                { value: "3", label: "Programs" },
                 { value: "100%", label: "Passion" },
               ].map((stat) => (
                 <div key={stat.label} className="text-center p-3 rounded-lg bg-white/50 border border-sky-200">

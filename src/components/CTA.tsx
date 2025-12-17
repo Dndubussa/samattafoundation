@@ -6,7 +6,7 @@ const CTA = () => {
   const stats = [
     { icon: Users, value: "5,000+", label: "Youth Empowered" },
     { icon: Target, value: "50+", label: "Communities Served" },
-    { icon: TrendingUp, value: "20+", label: "Active Programs" },
+    { icon: TrendingUp, value: "3", label: "Active Programs" },
     { icon: Heart, value: "100%", label: "Impact Driven" },
   ];
 

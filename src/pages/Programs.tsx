@@ -3,40 +3,33 @@ import { ArrowRight, Trophy, GraduationCap, Heart, Users, Calendar, MapPin } fro
 import { Link } from "react-router-dom";
 import SEO from "@/components/SEO";
 import samattaCupImage from "@/assets/NISHATI SAFI CUP.jpg";
-import event1 from "@/assets/gallery/event-1.jpg";
-import event3 from "@/assets/gallery/event-3.jpg";
-import event4 from "@/assets/gallery/event-4.jpg";
+import samakibaImage from "@/assets/SAMATTA (9).jpg";
+import orphanageImage from "@/assets/SAMATTA (10).jpg";
 
 const Programs = () => {
   const programs = [
     {
-      title: "Samatta Cup",
-      description: "Our flagship youth football tournament that brings together talented young players from across Tanzania, providing them with a platform to showcase their skills and compete at a high level.",
+      title: "Samatta Nishati Safi Cup",
+      description: "Our flagship youth football tournament promoting clean energy and environmental sustainability while bringing together talented young players from across Tanzania to showcase their skills and compete at the highest level.",
       icon: Trophy,
-      image: event1,
-      features: ["Annual youth football tournament", "Talent identification program", "Professional coaching clinics", "Scholarship opportunities"],
+      image: samattaCupImage,
+      features: ["Annual youth football tournament", "Clean energy advocacy", "Talent identification program", "Professional coaching clinics", "Scholarship opportunities"],
       featured: true,
     },
     {
-      title: "Education Support",
-      description: "Providing educational resources, scholarships, and mentorship programs to help young people achieve their academic goals alongside their sporting ambitions.",
-      icon: GraduationCap,
-      image: event3,
-      features: ["School supplies distribution", "Scholarship programs", "After-school tutoring", "Career guidance"],
-    },
-    {
-      title: "Health & Wellbeing",
-      description: "Promoting physical and mental health awareness through sports activities, health screenings, and wellness education programs.",
-      icon: Heart,
-      image: event4,
-      features: ["Health screenings", "Mental health awareness", "Nutrition education", "Sports medicine support"],
-    },
-    {
-      title: "Community Development",
-      description: "Building stronger communities through sports infrastructure development, volunteer programs, and social inclusion initiatives.",
+      title: "SamaKiba Nifuate",
+      description: "A comprehensive youth development program that empowers young people through sports, education, and mentorship—helping them discover their potential and pursue their dreams with confidence.",
       icon: Users,
-      image: event1,
-      features: ["Sports facility upgrades", "Volunteer programs", "Disability inclusion", "Women's empowerment"],
+      image: samakibaImage,
+      features: ["Youth mentorship programs", "Life skills training", "Sports-based development", "Community engagement activities"],
+    },
+    {
+      title: "Samatta Orphanage",
+      description: "A compassionate initiative providing care, support, and opportunities for orphaned children, ensuring they have access to education, healthcare, and a nurturing environment to thrive.",
+      icon: Heart,
+      image: orphanageImage,
+      features: ["Residential care facility", "Educational support", "Healthcare services", "Holistic child development"],
+      comingSoon: true,
     },
   ];
 
@@ -44,7 +37,7 @@ const Programs = () => {
     <main className="pt-32">
       <SEO
         title="Our Programs - Samatta Foundation"
-        description="Explore our programs including the Samatta Cup, Education Support, Health & Wellbeing, and Community Development initiatives transforming lives across Tanzania."
+        description="Explore our programs including the Samatta Nishati Safi Cup, SamaKiba Nifuate, and Samatta Orphanage initiatives transforming lives across Tanzania."
         url="/programs"
       />
       {/* Hero Section */}
@@ -59,7 +52,7 @@ const Programs = () => {
               Our Programs
             </h1>
             <p className="text-lg md:text-xl text-primary-foreground/85 max-w-2xl mx-auto">
-              Discover how we're making a difference through sports, education, and community initiatives across Tanzania.
+              Discover our three flagship programs making a lasting difference in the lives of youth and vulnerable communities across Tanzania.
             </p>
           </div>
         </div>
@@ -84,12 +77,12 @@ const Programs = () => {
                   </span>
                 </div>
                 <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground mb-6">
-                  The Samatta Cup
+                  Samatta Nishati Safi Cup
                 </h2>
                 <p className="text-muted-foreground mb-6 text-lg">
-                  The Samatta Cup is our premier youth football tournament, designed to discover and nurture 
-                  the next generation of Tanzanian football talent. This annual event brings together young 
-                  players from all corners of the country for a week of competition, learning, and inspiration.
+                  The Samatta Nishati Safi Cup is our premier youth football tournament combining sports excellence 
+                  with environmental advocacy. This annual event brings together young players from all corners of 
+                  Tanzania for a week of competition, learning, and inspiration while promoting clean energy and sustainability.
                 </p>
                 <div className="grid grid-cols-2 gap-4 mb-8">
                   <div className="flex items-center gap-3">
@@ -140,20 +133,25 @@ const Programs = () => {
               Making Impact
             </span>
             <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground mb-4">
-              Other Initiatives
+              More Programs
             </h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              Beyond the Samatta Cup, we run various programs addressing education, health, and community needs.
+              Beyond the Samatta Nishati Safi Cup, we run impactful programs focused on youth development and community care.
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
             {programs.slice(1).map((program, index) => (
               <div
                 key={program.title}
-                className="bg-card rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow animate-fade-in-up group"
+                className="bg-card rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow animate-fade-in-up group relative"
                 style={{ animationDelay: `${index * 100}ms` }}
               >
+                {program.comingSoon && (
+                  <div className="absolute top-4 right-4 z-10 bg-secondary text-secondary-foreground px-3 py-1 rounded-full text-xs font-semibold shadow-lg">
+                    Coming Soon
+                  </div>
+                )}
                 <div className="aspect-video overflow-hidden">
                   <img
                     src={program.image}
