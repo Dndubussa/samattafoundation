@@ -1,4 +1,8 @@
 import { Trophy, GraduationCap, Heart, Users } from "lucide-react";
+import samatta9 from "@/assets/SAMATTA (9).jpg";
+import samatta10 from "@/assets/SAMATTA (10).jpg";
+import samatta11 from "@/assets/SAMATTA (11).jpg";
+import samatta8 from "@/assets/SAMATTA (8).jpg";
 
 const features = [
   {
@@ -7,7 +11,7 @@ const features = [
     description:
       "Organizing football tournaments, talent identification, and life-skills training through sport—fostering discipline, leadership, and teamwork.",
     color: "from-secondary to-secondary-light",
-    image: "/src/assets/SAMATTA (9).jpg",
+    image: samatta9,
   },
   {
     icon: GraduationCap,
@@ -15,7 +19,7 @@ const features = [
     description:
       "Providing education awareness initiatives and support for school-going children from vulnerable backgrounds while encouraging academic excellence.",
     color: "from-primary to-primary-light",
-    image: "/src/assets/SAMATTA (10).jpg",
+    image: samatta10,
   },
   {
     icon: Heart,
@@ -23,7 +27,7 @@ const features = [
     description:
       "Running health awareness campaigns and community outreach programs promoting healthy lifestyles for vulnerable children and families.",
     color: "from-secondary to-secondary-light",
-    image: "/src/assets/SAMATTA (11).jpg",
+    image: samatta11,
   },
   {
     icon: Users,
@@ -31,7 +35,7 @@ const features = [
     description:
       "Advocating for marginalized groups including children with disabilities and people with albinism, promoting equal participation.",
     color: "from-primary to-primary-light",
-    image: "/src/assets/SAMATTA (8).jpg",
+    image: samatta8,
   },
 ];
 
