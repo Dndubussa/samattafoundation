@@ -3,7 +3,7 @@ import { ArrowRight, Trophy, GraduationCap, Heart, Users, Calendar, MapPin } fro
 import { Link } from "react-router-dom";
 import SEO from "@/components/SEO";
 import samattaCupImage from "@/assets/NISHATI SAFI CUP.jpg";
-import samakibaImage from "@/assets/SAMATTA (9).jpg";
+import samakibaImage from "@/assets/Nifuate.jpg";
 import orphanageImage from "@/assets/SAMATTA (10).jpg";
 
 const Programs = () => {
