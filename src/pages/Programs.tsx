@@ -113,7 +113,7 @@ const Programs = () => {
                 <img
                   src={samattaCupImage}
                   alt="Samatta Cup"
-                  className="rounded-2xl shadow-2xl w-full"
+                  className="rounded-2xl shadow-2xl w-full object-contain"
                 />
                 <div className="absolute -bottom-6 -right-6 bg-secondary text-secondary-foreground p-6 rounded-2xl shadow-xl">
                   <div className="text-3xl font-heading font-bold">2026</div>
@@ -152,11 +152,11 @@ const Programs = () => {
                     Coming Soon
                   </div>
                 )}
-                <div className="aspect-video overflow-hidden">
+                <div className="aspect-video overflow-hidden bg-muted/30 flex items-center justify-center">
                   <img
                     src={program.image}
                     alt={program.title}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                    className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-105"
                   />
                 </div>
                 <div className="p-6">
