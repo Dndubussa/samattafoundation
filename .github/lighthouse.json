@@ -1,0 +1,28 @@
+{
+  "ci": {
+    "collect": {
+      "url": [
+        "http://localhost:5173",
+        "http://localhost:5173/about",
+        "http://localhost:5173/programs",
+        "http://localhost:5173/blog"
+      ],
+      "numberOfRuns": 1,
+      "settings": {
+        "chromeFlags": "--no-sandbox"
+      }
+    },
+    "upload": {
+      "target": "temporary-public-storage"
+    },
+    "assert": {
+      "preset": "lighthouse:recommended",
+      "assertions": {
+        "categories:performance": ["error", { "minScore": 0.80 }],
+        "categories:accessibility": ["error", { "minScore": 0.90 }],
+        "categories:best-practices": ["error", { "minScore": 0.85 }],
+        "categories:seo": ["error", { "minScore": 0.90 }]
+      }
+    }
+  }
+}
