@@ -1,0 +1,212 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&family=Inter:wght@400;450;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Samatta Foundation Design System */
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 230 78% 15%;
+    --card: 0 0% 100%;
+    --card-foreground: 230 78% 15%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 230 78% 15%;
+    --primary: 230 78% 24%;
+    --primary-foreground: 0 0% 100%;
+    --primary-light: 230 70% 45%;
+    --primary-glow: 230 78% 35%;
+    --secondary: 38 95% 48%;
+    --secondary-foreground: 230 78% 10%;
+    --secondary-light: 38 95% 62%;
+    --muted: 220 20% 96%;
+    --muted-foreground: 220 10% 45%;
+    --accent: 38 95% 48%;
+    --accent-foreground: 230 78% 15%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 220 20% 90%;
+    --input: 220 20% 90%;
+    --ring: 230 78% 24%;
+    --radius: 0.75rem;
+    --shadow-sm: 0 2px 8px -2px hsl(230 78% 24% / 0.08);
+    --shadow-md: 0 8px 24px -8px hsl(230 78% 24% / 0.12);
+    --shadow-lg: 0 16px 48px -12px hsl(230 78% 24% / 0.18);
+    --shadow-glow: 0 4px 20px hsl(38 95% 48% / 0.35);
+    --shadow-primary-glow: 0 8px 32px hsl(230 78% 24% / 0.25);
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+  .dark {
+    --background: 230 40% 8%;
+    --foreground: 220 20% 95%;
+    --card: 230 35% 12%;
+    --card-foreground: 220 20% 95%;
+    --popover: 230 35% 12%;
+    --popover-foreground: 220 20% 95%;
+    --primary: 230 70% 55%;
+    --primary-foreground: 0 0% 100%;
+    --primary-light: 230 70% 65%;
+    --primary-glow: 230 70% 45%;
+    --secondary: 38 95% 55%;
+    --secondary-foreground: 230 78% 15%;
+    --muted: 230 30% 18%;
+    --muted-foreground: 220 15% 60%;
+    --accent: 38 95% 55%;
+    --accent-foreground: 230 78% 15%;
+    --destructive: 0 62% 30%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 230 30% 20%;
+    --input: 230 30% 20%;
+    --ring: 230 70% 55%;
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * { @apply border-border; }
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-size: 15px;
+    line-height: 1.75;
+    letter-spacing: 0.01em;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-heading text-foreground;
+    letter-spacing: -0.035em;
+    line-height: 1.12;
+  }
+  h1 {
+    font-size: clamp(2.75rem, 5vw, 4.5rem);
+    font-weight: 900;
+  }
+  h2 {
+    font-size: clamp(2.25rem, 4.5vw, 3.5rem);
+    font-weight: 800;
+  }
+  h3 {
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    font-weight: 700;
+  }
+  p {
+    @apply leading-relaxed tracking-[0.015em];
+  }
+}
+
+@layer components {
+  .section-kicker {
+    @apply inline-flex items-center justify-center gap-3 text-[0.72rem] font-semibold uppercase tracking-[0.35em] text-primary mb-4;
+  }
+  .section-kicker::before,
+  .section-kicker::after {
+    content: "";
+    @apply block h-px w-6 bg-primary/25;
+  }
+  .section-heading {
+    @apply text-[1.85rem] md:text-[2.5rem] lg:text-[3rem] font-heading font-bold text-foreground mb-5;
+    letter-spacing: -0.025em;
+    line-height: 1.15;
+  }
+
+  /* Clean bare icon — no box, no background. Used across all pages for human, editorial feel */
+  .icon-bare {
+    @apply text-secondary flex-shrink-0;
+    stroke-width: 1.75px;
+  }
+
+
+  /* Scroll-reveal system */
+  .reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    will-change: opacity, transform;
+  }
+  .reveal.is-visible { opacity: 1; transform: translateY(0); }
+
+  .reveal-from-left {
+    opacity: 0;
+    transform: translateX(-48px);
+    transition: opacity 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    will-change: opacity, transform;
+  }
+  .reveal-from-left.is-visible { opacity: 1; transform: translateX(0); }
+
+  .reveal-from-right {
+    opacity: 0;
+    transform: translateX(48px);
+    transition: opacity 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    will-change: opacity, transform;
+  }
+  .reveal-from-right.is-visible { opacity: 1; transform: translateX(0); }
+
+  .reveal-stagger > *:nth-child(1) { transition-delay: 0ms; }
+  .reveal-stagger > *:nth-child(2) { transition-delay: 80ms; }
+  .reveal-stagger > *:nth-child(3) { transition-delay: 160ms; }
+  .reveal-stagger > *:nth-child(4) { transition-delay: 240ms; }
+  .reveal-stagger > *:nth-child(5) { transition-delay: 320ms; }
+  .reveal-stagger > *:nth-child(6) { transition-delay: 400ms; }
+}
+
+@layer utilities {
+  .animate-fade-in-up  { animation: fadeInUp  0.6s ease-out forwards; }
+  .animate-fade-in     { animation: fadeIn    0.5s ease-out forwards; }
+  .animate-scale-in    { animation: scaleIn   0.5s ease-out forwards; }
+  .animate-slide-in-left  { animation: slideInLeft  0.6s ease-out forwards; }
+  .animate-slide-in-right { animation: slideInRight 0.6s ease-out forwards; }
+
+  /* Partners ticker: pause on hover */
+  .ticker-container:hover .animate-slide-left,
+  .ticker-container:hover .animate-slide-left-slow {
+    animation-play-state: paused;
+  }
+}
+
+@keyframes fadeInUp    { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes fadeIn      { from { opacity: 0; } to { opacity: 1; } }
+@keyframes scaleIn     { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
+@keyframes slideInLeft { from { opacity: 0; transform: translateX(-50px); } to { opacity: 1; transform: translateX(0); } }
+@keyframes slideInRight{ from { opacity: 0; transform: translateX(50px); } to { opacity: 1; transform: translateX(0); } }
+@keyframes slideUp     { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes slideDown   { from { opacity: 1; transform: translateY(0); } to { opacity: 0; transform: translateY(-20px); } }
+@keyframes float       { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+
+.animate-float      { animation: float     4s   ease-in-out infinite; }
+.animate-slide-up   { animation: slideUp   0.5s ease-out    forwards; }
+.animate-slide-down { animation: slideDown 0.5s ease-out    forwards; }
+
+/* Gallery slideshow */
+.gallery-thumb { transition: opacity 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease; }
+.gallery-thumb:hover, .gallery-thumb.active { opacity: 1 !important; transform: translateY(-2px); }
+
+/* Counter reveal */
+.counter-reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
+.counter-reveal.is-visible { opacity: 1; transform: translateY(0); }
+
+/* Gallery caption animation */
+@keyframes captionRise {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.animate-caption-rise { animation: captionRise 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.2s both; }
