@@ -25,12 +25,12 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="bg-foreground text-primary-foreground pt-8 pb-4">
+    <footer className="bg-foreground text-primary-foreground pt-14 pb-6">
       <div className="container mx-auto px-4">
         {/* Newsletter Section */}
         <div className="mb-6 pb-6 border-b border-primary-foreground/10">
           <div className="max-w-2xl mx-auto text-center">
-            <h3 className="font-heading text-xl font-bold mb-2">
+            <h3 className="font-heading text-2xl font-bold mb-2">
               Stay Updated
             </h3>
             <p className="text-primary-foreground/70 mb-4">
@@ -60,7 +60,7 @@ const Footer = () => {
                   aria-label={social.label}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-lg bg-primary-foreground/10 flex items-center justify-center hover:bg-secondary hover:text-secondary-foreground transition-all duration-300"
+                  className="w-10 h-10 rounded-full bg-primary-foreground/10 flex items-center justify-center hover:bg-secondary hover:text-secondary-foreground hover:scale-110 transition-all duration-300"
                 >
                   <social.icon className="w-5 h-5" />
                 </a>

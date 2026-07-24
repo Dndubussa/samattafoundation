@@ -41,7 +41,7 @@ const Partners = () => {
   }, []);
 
   return (
-    <section ref={sectionRef} className="py-16 bg-[#FAFAF8] border-t border-border">
+    <section ref={sectionRef} className="py-16 bg-background border-t border-border">
       <div className="container mx-auto px-4 mb-10">
         <p className="reveal text-center text-xs font-bold uppercase tracking-[0.35em] text-muted-foreground">
           Our Partners, Sponsors &amp; Collaborators
@@ -51,8 +51,8 @@ const Partners = () => {
       {/* Infinite scroll ticker - pauses on hover via CSS */}
       <div className="relative overflow-hidden ticker-container">
         {/* Fade edges */}
-        <div className="absolute left-0 top-0 bottom-0 w-20 bg-[#FAFAF8] z-10 pointer-events-none [mask-image:linear-gradient(to_right,white,transparent)]" />
-        <div className="absolute right-0 top-0 bottom-0 w-20 bg-[#FAFAF8] z-10 pointer-events-none [mask-image:linear-gradient(to_left,white,transparent)]" />
+        <div className="absolute left-0 top-0 bottom-0 w-20 z-10 pointer-events-none" style={{background: "linear-gradient(to right, hsl(var(--background)), transparent)"}} />
+        <div className="absolute right-0 top-0 bottom-0 w-20 z-10 pointer-events-none" style={{background: "linear-gradient(to left, hsl(var(--background)), transparent)"}} />
 
         <div className="flex animate-slide-left">
           {duplicatedPartners.map((partner, index) => (

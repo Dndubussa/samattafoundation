@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&family=Inter:wght@400;450;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -8,11 +8,11 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
+    --background: 205 70% 96%;
     --foreground: 230 78% 15%;
-    --card: 0 0% 100%;
+    --card: 0 0% 100%; /* white cards float above sky-blue bg */
     --card-foreground: 230 78% 15%;
-    --popover: 0 0% 100%;
+    --popover: 0 0% 100%;   /* keep popover white for crisp legibility */
     --popover-foreground: 230 78% 15%;
     --primary: 230 78% 24%;
     --primary-foreground: 0 0% 100%;
@@ -21,21 +21,22 @@
     --secondary: 38 95% 48%;
     --secondary-foreground: 230 78% 10%;
     --secondary-light: 38 95% 62%;
-    --muted: 220 20% 96%;
+    --muted: 205 40% 93%;
     --muted-foreground: 220 10% 45%;
     --accent: 38 95% 48%;
     --accent-foreground: 230 78% 15%;
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
-    --border: 220 20% 90%;
-    --input: 220 20% 90%;
+    --border: 205 40% 88%;
+    --input: 205 40% 88%;
     --ring: 230 78% 24%;
     --radius: 0.75rem;
-    --shadow-sm: 0 2px 8px -2px hsl(230 78% 24% / 0.08);
-    --shadow-md: 0 8px 24px -8px hsl(230 78% 24% / 0.12);
-    --shadow-lg: 0 16px 48px -12px hsl(230 78% 24% / 0.18);
+    --shadow-sm: 0 2px 8px -2px hsl(205 60% 40% / 0.10);
+    --shadow-md: 0 8px 24px -8px hsl(205 60% 40% / 0.14);
+    --shadow-lg: 0 16px 48px -12px hsl(205 60% 40% / 0.20);
     --shadow-glow: 0 4px 20px hsl(38 95% 48% / 0.35);
     --shadow-primary-glow: 0 8px 32px hsl(230 78% 24% / 0.25);
+    --nav-active-bg: 230 78% 24%; /* solid pill for active nav link */
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;
     --sidebar-primary: 240 5.9% 10%;

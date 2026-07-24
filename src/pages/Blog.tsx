@@ -1,4 +1,4 @@
-﻿import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Calendar, User } from "lucide-react";
 import { useBlogPosts } from "@/hooks/queries/use-blog";
 import { formatLongDate } from "@/lib/utils/date";

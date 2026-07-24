@@ -72,7 +72,9 @@ const Navbar = () => {
                     key={link.label}
                     to={link.href}
                     className={`relative px-4 py-2 text-sm font-semibold transition-all duration-300 rounded-full group ${
-                      isActive ? "text-primary bg-primary/5" : "text-foreground/70 hover:text-foreground hover:bg-muted/50"
+                      isActive
+                        ? "text-white bg-primary shadow-[0_2px_12px_hsl(230_78%_24%/0.35)] scale-[1.03]"
+                        : "text-foreground/70 hover:text-foreground hover:bg-sky-100/70"
                     }`}
                   >
                     {link.label}
@@ -120,8 +122,8 @@ const Navbar = () => {
                 to={link.href}
                 className={`px-5 py-3.5 rounded-2xl text-base font-semibold transition-all duration-200 ${
                   isActive
-                    ? "text-primary bg-primary/10"
-                    : "text-foreground/80 hover:text-foreground hover:bg-muted/60"
+                    ? "text-white bg-primary shadow-sm"
+                    : "text-foreground/80 hover:text-foreground hover:bg-sky-100/70"
                 }`}
               >
                 {link.label}

@@ -1,4 +1,4 @@
-﻿import { useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import VolunteerForm from "@/components/forms/VolunteerForm";
 import PageHero from "@/components/layout/PageHero";
 import SEO from "@/components/SEO";

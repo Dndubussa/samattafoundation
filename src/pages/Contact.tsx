@@ -68,12 +68,12 @@ const Contact = () => {
         description="Have questions or want to get involved? We would love to hear from you."
       />
 
-      <section data-reveal className="py-20 bg-white">
+      <section data-reveal className="py-20 bg-background">
         <div className="container mx-auto px-4 max-w-6xl">
           <div className="grid lg:grid-cols-5 gap-12">
             {/* Form - wider column */}
             <div className="lg:col-span-3 reveal-from-left">
-              <div className="bg-white border border-border rounded-2xl p-8 md:p-10 shadow-sm">
+              <div className="bg-card border border-border rounded-2xl p-8 md:p-10 shadow-md">
                 <h2 className="font-heading text-2xl font-black text-foreground mb-7">
                   Send Us a Message
                 </h2>
@@ -84,7 +84,7 @@ const Contact = () => {
             {/* Sidebar info */}
             <div className="lg:col-span-2 space-y-5 reveal-from-right" style={{ transitionDelay: "80ms" }}>
               {/* Contact details card */}
-              <div className="bg-white border border-border rounded-2xl p-8 shadow-sm">
+              <div className="bg-card border border-border rounded-2xl p-8 shadow-md">
                 <h3 className="font-heading text-xl font-bold text-foreground mb-7">
                   Contact Information
                 </h3>
@@ -125,7 +125,7 @@ const Contact = () => {
               </div>
 
               {/* Urgent assistance */}
-              <div className="bg-foreground rounded-2xl p-7 text-white">
+              <div className="rounded-2xl p-7 text-white" style={{background:"linear-gradient(135deg, hsl(230 78% 14%) 0%, hsl(205 70% 20%) 100%)"}}>
                 <h3 className="font-heading font-bold text-lg mb-2">Need Immediate Assistance?</h3>
                 <p className="text-white/70 text-sm leading-relaxed mb-4">
                   For urgent matters, call us directly or send an email. We respond to all inquiries within 24–48 hours.

@@ -26,27 +26,52 @@ const Terms = lazy(() => import("./pages/Terms"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
 const PageLoader = () => (
-  <div className="min-h-screen bg-background px-4 py-24">
-    <div className="mx-auto flex w-full max-w-6xl flex-col gap-8">
-      <div className="space-y-3">
-        <Skeleton className="h-4 w-24 rounded-full" />
-        <Skeleton className="h-10 w-72 rounded-xl" />
-        <Skeleton className="h-4 w-96 rounded-full" />
-      </div>
-
-      <div className="grid gap-6 md:grid-cols-3">
-        {Array.from({ length: 3 }).map((_, index) => (
-          <div key={index} className="rounded-2xl border border-border/60 bg-card p-6 shadow-sm">
-            <Skeleton className="mb-4 h-32 w-full rounded-xl" />
-            <Skeleton className="mb-3 h-4 w-3/4 rounded-full" />
-            <Skeleton className="mb-2 h-4 w-full rounded-full" />
-            <Skeleton className="h-4 w-5/6 rounded-full" />
-          </div>
-        ))}
+  <div
+    className="min-h-screen flex flex-col items-center justify-center gap-8"
+    style={{
+      background:
+        "linear-gradient(135deg, hsl(230 78% 10%) 0%, hsl(230 78% 16%) 55%, hsl(205 70% 20%) 100%)",
+    }}
+  >
+    {/* Spinning ring */}
+    <div className="relative w-20 h-20">
+      <div className="absolute inset-0 rounded-full border-2 border-white/10" />
+      <div
+        className="absolute inset-0 rounded-full border-2 border-transparent border-t-amber-400"
+        style={{ animation: "spin 1s linear infinite" }}
+      />
+      {/* Inner pulsing dot */}
+      <div className="absolute inset-0 flex items-center justify-center">
+        <div className="w-3 h-3 rounded-full bg-amber-400 opacity-80 animate-pulse" />
       </div>
     </div>
+
+    {/* Wordmark */}
+    <div className="flex flex-col items-center gap-2">
+      <p className="text-white font-heading font-black text-base tracking-widest uppercase">
+        Samatta Foundation
+      </p>
+      <span className="text-white/40 text-[0.68rem] uppercase tracking-[0.35em]">Loading...</span>
+    </div>
+
+    {/* Progress bar */}
+    <div className="w-40 h-0.5 rounded-full bg-white/10 overflow-hidden">
+      <div
+        className="h-full rounded-full bg-amber-400/70"
+        style={{ animation: "progressPulse 1.5s ease-in-out infinite" }}
+      />
+    </div>
+
+    <style>{`
+      @keyframes progressPulse {
+        0% { width: 15%; }
+        50% { width: 75%; }
+        100% { width: 15%; }
+      }
+    `}</style>
   </div>
 );
+
 
 const App = () => (
   <QueryClientProvider client={queryClient}>

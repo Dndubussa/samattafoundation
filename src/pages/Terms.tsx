@@ -1,4 +1,4 @@
-﻿import SEO from "@/components/SEO";
+import SEO from "@/components/SEO";
 
 const Terms = () => {
   return (
@@ -137,9 +137,9 @@ const Terms = () => {
                 For questions about these Terms of Service, please contact us:
               </p>
               <ul className="list-none text-muted-foreground mb-6">
-                <li className="mb-2">ðŸ“§ Email: <a href="mailto:info@samattafoundation.org" className="text-secondary hover:underline">info@samattafoundation.org</a></li>
-                <li className="mb-2">ðŸ“ž Phone: +255 712 131 079</li>
-                <li className="mb-2">ðŸ“ Address: Dar es Salaam, Tanzania</li>
+                <li className="mb-2">📧 Email: <a href="mailto:info@samattafoundation.org" className="text-secondary hover:underline">info@samattafoundation.org</a></li>
+                <li className="mb-2">📞 Phone: +255 712 131 079</li>
+                <li className="mb-2">📍 Address: Dar es Salaam, Tanzania</li>
               </ul>
 
               <div className="mt-12 p-6 bg-muted/30 rounded-lg">

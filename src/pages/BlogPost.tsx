@@ -1,4 +1,4 @@
-﻿import { Link, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { Calendar, User, ArrowLeft, Eye } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useBlogPost } from "@/hooks/queries/use-blog";

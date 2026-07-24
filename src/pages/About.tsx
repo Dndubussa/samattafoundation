@@ -81,7 +81,7 @@ const About = () => {
       />
 
       {/* Who We Are */}
-      <section data-reveal className="py-20 bg-white">
+      <section data-reveal className="py-20 bg-background">
         <div className="container mx-auto px-4 max-w-3xl text-center">
           <span className="section-kicker reveal">Who We Are</span>
           <h2 className="section-heading reveal" style={{transitionDelay:"80ms"}}>A Force for Social Change</h2>
@@ -97,7 +97,7 @@ const About = () => {
       </section>
 
       {/* Our Story */}
-      <section data-reveal className="py-20 bg-[#FAFAF8] border-t border-border">
+      <section data-reveal className="py-20 bg-card border-t border-border">
         <div className="container mx-auto px-4">
           <div className="grid lg:grid-cols-2 gap-14 items-center max-w-6xl mx-auto">
             <div className="reveal-from-left">
@@ -120,7 +120,7 @@ const About = () => {
       </section>
 
       {/* Mission & Vision */}
-      <section data-reveal className="py-20 bg-white border-t border-border">
+      <section data-reveal className="py-20 bg-background border-t border-border">
         <div className="container mx-auto px-4 max-w-5xl">
           <div className="text-center mb-14">
             <h2 className="section-heading reveal">Our Mission &amp; Vision</h2>
@@ -132,7 +132,7 @@ const About = () => {
               { icon: Target, label: "Our Mission", accent: "text-primary",
                 text: "To promote and protect equal opportunities, advance human rights, and deliver impactful awareness and educational campaigns that support the social integration, security, and wellbeing of vulnerable communities in Tanzania." },
             ].map((item, i) => (
-              <div key={item.label} className="reveal bg-white rounded-2xl p-8 border border-border" style={{transitionDelay:`${i*80}ms`}}>
+              <div key={item.label} className="reveal bg-card rounded-2xl p-8 border border-border shadow-sm" style={{transitionDelay:`${i*80}ms`}}>
                 <item.icon className={`w-6 h-6 ${item.accent} mb-5`} strokeWidth={1.75} />
                 <h3 className="font-heading text-xl font-bold text-foreground mb-3">{item.label}</h3>
                 <p className="text-muted-foreground leading-relaxed text-[14.5px]">{item.text}</p>
@@ -143,7 +143,7 @@ const About = () => {
       </section>
 
       {/* Core Values */}
-      <section data-reveal className="py-20 bg-[#FAFAF8] border-t border-border">
+      <section data-reveal className="py-20 bg-card border-t border-border">
         <div className="container mx-auto px-4 max-w-6xl">
           <div className="text-center mb-14">
             <span className="section-kicker reveal">What We Stand For</span>
@@ -151,7 +151,7 @@ const About = () => {
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 reveal-stagger">
             {values.map((v) => (
-              <div key={v.title} className="reveal group text-center p-6 bg-white rounded-xl border border-border hover:border-primary/20 hover:-translate-y-1 transition-all duration-300">
+              <div key={v.title} className="reveal group text-center p-6 bg-background rounded-xl border border-border shadow-sm hover:border-primary/20 hover:-translate-y-1 hover:shadow-md transition-all duration-300">
                 <v.icon className="w-6 h-6 text-secondary mx-auto mb-4" strokeWidth={1.75} />
                 <h3 className="font-heading font-semibold text-foreground mb-2 text-[15px]">{v.title}</h3>
                 <p className="text-[13.5px] text-muted-foreground leading-relaxed">{v.desc}</p>
@@ -163,7 +163,7 @@ const About = () => {
       </section>
 
       {/* Areas of Intervention */}
-      <section data-reveal className="py-20 bg-white border-t border-border">
+      <section data-reveal className="py-20 bg-background border-t border-border">
         <div className="container mx-auto px-4 max-w-6xl">
           <div className="text-center mb-14">
             <span className="section-kicker reveal">Our Work</span>
@@ -184,14 +184,14 @@ const About = () => {
       </section>
 
       {/* Impact & Recognition */}
-      <section data-reveal className="py-20 bg-[#FAFAF8] border-t border-border">
+      <section data-reveal className="py-20 bg-card border-t border-border">
         <div className="container mx-auto px-4 max-w-6xl">
           <div className="text-center mb-14">
             <span className="section-kicker reveal">Impact &amp; Recognition</span>
             <h2 className="section-heading reveal" style={{transitionDelay:"80ms"}}>Community Impact in Action</h2>
           </div>
           <div className="grid lg:grid-cols-2 gap-8">
-            <div className="reveal rounded-2xl border border-border bg-white p-8">
+            <div className="reveal rounded-2xl border border-border bg-background p-8 shadow-sm">
               <h3 className="font-heading text-xl font-bold text-foreground mb-5">What Our Work Has Reached</h3>
               <ul className="space-y-3">
                 {[
@@ -207,7 +207,7 @@ const About = () => {
                 ))}
               </ul>
             </div>
-            <div className="reveal rounded-2xl border border-border bg-white p-8" style={{transitionDelay:"80ms"}}>
+            <div className="reveal rounded-2xl border border-border bg-background p-8 shadow-sm" style={{transitionDelay:"80ms"}}>
               <h3 className="font-heading text-xl font-bold text-foreground mb-5">SamaKiba Nifuate &amp; International Recognition</h3>
               <p className="text-muted-foreground mb-4">SamaKiba Nifuate is one of the Foundation's largest annual charity initiatives, launched in partnership with the Alikiba Foundation in 2016. The campaign brings together sport, music, charity, and community development under the theme "Asante TZ" for 2026.</p>
               <p className="font-semibold text-foreground border-l-4 border-primary pl-4">The Foundation has received Special Recognition for Community Impact in Sports Tourism from UN Tourism - an important sign of the work's international standing.</p>
@@ -217,7 +217,7 @@ const About = () => {
       </section>
 
       {/* Our Team */}
-      <section data-reveal className="py-20 bg-white border-t border-border">
+      <section data-reveal className="py-20 bg-card border-t border-border">
         <div className="container mx-auto px-4 max-w-5xl">
           <div className="text-center mb-12">
             <span className="section-kicker reveal">Leadership</span>
@@ -231,7 +231,7 @@ const About = () => {
                 className="reveal group text-center"
                 style={{ transitionDelay: `${i * 80}ms` }}
               >
-                <div className="relative mx-auto mb-5 aspect-[3/4] max-w-xs overflow-hidden rounded-2xl border border-border bg-[#FAFAF8] shadow-md">
+                <div className="relative mx-auto mb-5 aspect-[3/4] max-w-xs overflow-hidden rounded-2xl border border-border bg-card shadow-md">
                   <img
                     src={member.image}
                     alt={member.name}

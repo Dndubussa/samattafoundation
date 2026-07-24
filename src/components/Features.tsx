@@ -1,142 +1,308 @@
-import { useEffect, useRef } from "react";
-import samatta9 from "@/assets/SAMATTA (9).jpg";
-import samatta10 from "@/assets/SAMATTA (10).jpg";
-import samatta11 from "@/assets/SAMATTA (11).jpg";
-import samatta8 from "@/assets/SAMATTA (8).jpg";
+import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Dumbbell, BookOpen, HeartPulse, Users, ChevronLeft, ChevronRight } from "lucide-react";
 
 const features = [
   {
     number: "01",
+    icon: Dumbbell,
+    accent: "text-amber-500",
+    dotColor: "bg-amber-400",
+    borderActive: "border-amber-400/60",
     title: "Youth & Sports Development",
+    tag: "Football for Impact",
     description:
-      "Organizing football tournaments, talent identification, and life-skills training through sport - fostering discipline, leadership, and teamwork across Tanzanian communities.",
-    image: samatta9,
-    imageAlt: "Youth football training in Tanzania",
-    className: "md:col-span-2",
+      "Through the Samatta Nishati Safi Cup - a tournament featuring 35 teams across 85 matches - the Foundation identifies talent in youth aged 15-25 and provides professional coaching, structured competition, and mentorship to shape future leaders.",
+    bullets: [
+      "35-team Samatta Cup tournament",
+      "Talent identification pathways",
+      "Life-skills & leadership workshops",
+    ],
   },
   {
     number: "02",
+    icon: BookOpen,
+    accent: "text-blue-500",
+    dotColor: "bg-blue-400",
+    borderActive: "border-blue-400/60",
     title: "Education Support",
+    tag: "Opening Doors",
     description:
-      "Providing education awareness initiatives and support for school-going children from vulnerable backgrounds while encouraging academic excellence and equal access.",
-    image: samatta10,
-    imageAlt: "Education support for Tanzanian children",
-    className: "md:col-span-1",
+      "The Foundation actively supports school-going children from vulnerable backgrounds across Tanzania - providing school fees, investing in children's centres, and running awareness initiatives that champion academic excellence and equal access to learning.",
+    bullets: [
+      "School fee support for vulnerable families",
+      "Children's centres & learning spaces",
+      "Inclusive education advocacy",
+    ],
   },
   {
     number: "03",
+    icon: HeartPulse,
+    accent: "text-rose-500",
+    dotColor: "bg-rose-400",
+    borderActive: "border-rose-400/60",
     title: "Health & Wellbeing",
+    tag: "Healthier Communities",
     description:
-      "Running health awareness campaigns and community outreach programs promoting healthy lifestyles, clean energy adoption, and SRHR education for vulnerable families.",
-    image: samatta11,
-    imageAlt: "Health and wellbeing community outreach",
-    className: "md:col-span-1",
+      "The Clean Cooking Energy Campaign equips food vendors and households with clean cooking equipment, reducing harmful indoor emissions. The Foundation also runs SRHR education and donates hospital equipment - oxygen cylinders, wheelchairs, and mattresses - to underserved facilities.",
+    bullets: [
+      "Clean Cooking Energy Campaign",
+      "SRHR education for youth & families",
+      "Hospital equipment donations",
+    ],
   },
   {
     number: "04",
-    title: "Social Inclusion",
+    icon: Users,
+    accent: "text-emerald-600",
+    dotColor: "bg-emerald-400",
+    borderActive: "border-emerald-400/60",
+    title: "Social Inclusion & Advocacy",
+    tag: "Dignity for All",
     description:
-      "Advocating for marginalized groups including children with disabilities and people with albinism - promoting dignity, equality, and full participation in society.",
-    image: samatta8,
-    imageAlt: "Social inclusion advocacy for marginalized groups",
-    className: "md:col-span-2",
+      "Since its founding, the Foundation has been a strong voice against discrimination of People Living with Disabilities and people with albinism. Through advocacy, wheelchair donations, hydrocephalus care, and inclusive programming, it works to dismantle systemic barriers across Tanzania.",
+    bullets: [
+      "Advocacy for persons with albinism & disabilities",
+      "Wheelchair & hydrocephalus care programmes",
+      "UN Tourism Special Recognition",
+    ],
   },
 ];
 
-const Features = () => {
-  const sectionRef = useRef<HTMLElement>(null);
+const CARD_INTERVAL = 4500;
 
+const Features = () => {
+  const sectionRef     = useRef<HTMLElement>(null);
+  const [active, setActive]       = useState(0);
+  const [dir, setDir]             = useState<"next" | "prev">("next");
+  const [animating, setAnimating] = useState(false);
+  const [visible, setVisible]     = useState(false);
+  const [paused, setPaused]       = useState(false);
+
+  /* Scroll reveal */
   useEffect(() => {
     const el = sectionRef.current;
     if (!el) return;
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            el.querySelectorAll(".reveal-bento").forEach((node, i) => {
-              setTimeout(() => {
-                node.classList.add("is-visible");
-              }, i * 150);
-            });
-            observer.disconnect();
-          }
-        });
-      },
-      { threshold: 0.1 }
+    const obs = new IntersectionObserver(
+      ([e]) => { if (e.isIntersecting) setVisible(true); },
+      { threshold: 0.08 }
     );
-    observer.observe(el);
-    return () => observer.disconnect();
+    obs.observe(el);
+    return () => obs.disconnect();
   }, []);
 
+  /* Auto-advance */
+  useEffect(() => {
+    if (paused) return;
+    const t = setInterval(() => {
+      setDir("next");
+      setAnimating(true);
+      setTimeout(() => {
+        setActive(a => (a + 1) % features.length);
+        setAnimating(false);
+      }, 320);
+    }, CARD_INTERVAL);
+    return () => clearInterval(t);
+  }, [paused]);
+
+  const goTo = (idx: number) => {
+    if (idx === active || animating) return;
+    setDir(idx > active ? "next" : "prev");
+    setAnimating(true);
+    setTimeout(() => {
+      setActive(idx);
+      setAnimating(false);
+    }, 320);
+  };
+
+  const step = (d: 1 | -1) => {
+    const next = (active + d + features.length) % features.length;
+    goTo(next);
+  };
+
+  const f = features[active];
+  const Icon = f.icon;
+
+  const slideClass = animating
+    ? dir === "next"
+      ? "translate-x-6 opacity-0"
+      : "-translate-x-6 opacity-0"
+    : "translate-x-0 opacity-100";
+
   return (
-    <section ref={sectionRef} id="programs" className="py-24 bg-zinc-50">
-      <div className="container mx-auto px-4 max-w-5xl">
+    <section
+      ref={sectionRef}
+      id="programs"
+      className="py-24 bg-background"
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => setPaused(false)}
+    >
+      <div className="container mx-auto px-4 sm:px-6 max-w-5xl">
+
         {/* Section header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
-          <div className="max-w-2xl">
-            <span className="section-kicker reveal-bento opacity-0 translate-y-4 transition-all duration-700 [&.is-visible]:opacity-100 [&.is-visible]:translate-y-0">Our Focus Areas</span>
-            <h2 className="text-3xl md:text-5xl font-heading font-black text-foreground mb-4 reveal-bento opacity-0 translate-y-4 transition-all duration-700 delay-100 [&.is-visible]:opacity-100 [&.is-visible]:translate-y-0">
+        <div
+          className={`flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 transition-all duration-700 ${
+            visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-5"
+          }`}
+        >
+          <div className="max-w-xl">
+            <span className="section-kicker">Our Focus Areas</span>
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-heading font-black text-foreground mb-3">
               Creating Lasting Impact
             </h2>
-            <p className="text-muted-foreground text-lg reveal-bento opacity-0 translate-y-4 transition-all duration-700 delay-200 [&.is-visible]:opacity-100 [&.is-visible]:translate-y-0">
-              Through sports, education, health, and advocacy, we build pathways for Tanzania's youth
-              to reach their full potential.
+            <p className="text-muted-foreground text-base md:text-lg">
+              Four interconnected pillars that build pathways for Tanzania's youth to reach their full potential.
             </p>
           </div>
-          <div className="reveal-bento opacity-0 translate-y-4 transition-all duration-700 delay-300 [&.is-visible]:opacity-100 [&.is-visible]:translate-y-0">
-            <Link to="/programs" className="inline-flex items-center text-primary font-bold hover:underline">
-              View all programs <ArrowRight className="ml-2 w-4 h-4" />
+          <div className="flex-shrink-0">
+            <Link
+              to="/programs"
+              className="inline-flex items-center gap-2 text-primary font-bold text-sm hover:gap-3 transition-all duration-200"
+            >
+              View all programs <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
         </div>
 
-        {/* Bento Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 auto-rows-[300px] md:auto-rows-[320px]">
-          {features.map((feature) => (
-            <div
-              key={feature.title}
-              className={`reveal-bento opacity-0 translate-y-8 [&.is-visible]:opacity-100 [&.is-visible]:translate-y-0 transition-all duration-1000 group relative overflow-hidden rounded-3xl shadow-sm hover:shadow-xl ${feature.className}`}
-            >
-              {/* Image Background */}
-              <img
-                src={feature.image}
-                alt={feature.imageAlt}
-                className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                loading="lazy"
-              />
-              
-              {/* Gradient Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/50 to-black/10 opacity-80 group-hover:opacity-90 transition-opacity duration-500" />
+        {/* Tab buttons */}
+        <div
+          className={`flex flex-wrap gap-2 mb-8 transition-all duration-700 delay-100 ${
+            visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-5"
+          }`}
+        >
+          {features.map((feat, i) => {
+            const TabIcon = feat.icon;
+            const isActive = i === active;
+            return (
+              <button
+                key={feat.number}
+                onClick={() => goTo(i)}
+                className={`flex items-center gap-2 px-4 py-2 rounded-full border text-sm font-semibold transition-all duration-300 ${
+                  isActive
+                    ? `bg-foreground text-white border-foreground shadow-md scale-[1.03]`
+                    : "bg-card border-border text-muted-foreground hover:border-foreground/30 hover:text-foreground"
+                }`}
+              >
+                <TabIcon className={`w-3.5 h-3.5 ${isActive ? "text-white" : feat.accent}`} strokeWidth={2} />
+                <span className="hidden sm:inline">{feat.number}</span>
+                <span className="hidden md:inline text-xs">
+                  {feat.title.split(" ").slice(0, 2).join(" ")}
+                </span>
+              </button>
+            );
+          })}
 
-              {/* Content Container */}
-              <div className="absolute inset-0 p-6 md:p-8 flex flex-col justify-end transform transition-transform duration-500 translate-y-8 group-hover:translate-y-0">
-                <div className="flex items-start justify-between gap-4 mb-3">
-                  <h3 className="text-2xl md:text-3xl font-heading font-bold text-white leading-tight">
-                    {feature.title}
-                  </h3>
-                  <span className="text-xl md:text-3xl font-black text-white/20 select-none">
-                    {feature.number}
+          <div className="flex items-center gap-1.5 ml-auto">
+            <button
+              onClick={() => step(-1)}
+              aria-label="Previous pillar"
+              className="w-8 h-8 rounded-full border border-border flex items-center justify-center text-muted-foreground hover:bg-card hover:text-foreground transition-all duration-200"
+            >
+              <ChevronLeft className="w-3.5 h-3.5" />
+            </button>
+            <button
+              onClick={() => step(1)}
+              aria-label="Next pillar"
+              className="w-8 h-8 rounded-full border border-border flex items-center justify-center text-muted-foreground hover:bg-card hover:text-foreground transition-all duration-200"
+            >
+              <ChevronRight className="w-3.5 h-3.5" />
+            </button>
+          </div>
+        </div>
+
+        {/* Animated content card */}
+        <div
+          className={`transition-all duration-700 delay-150 ${
+            visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-5"
+          }`}
+        >
+          <div
+            className={`bg-card border ${f.borderActive} rounded-2xl p-7 md:p-10 shadow-sm transition-all duration-300 ease-out ${slideClass}`}
+          >
+            <div className="grid md:grid-cols-[1fr_auto] gap-8 items-start">
+
+              {/* Left: content */}
+              <div>
+                {/* Icon + number row */}
+                <div className="flex items-center gap-3 mb-5">
+                  <Icon className={`w-6 h-6 ${f.accent}`} strokeWidth={1.75} />
+                  <span className={`text-[0.7rem] font-black uppercase tracking-[0.35em] ${f.accent} opacity-50`}>
+                    {f.number}
                   </span>
                 </div>
-                
-                <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100 h-[80px] md:h-[60px]">
-                  <p className="text-white/80 text-sm md:text-base leading-relaxed line-clamp-3">
-                    {feature.description}
-                  </p>
-                </div>
-                
-                {/* Decorative Line */}
-                <div className="h-1 w-12 bg-primary mt-4 rounded-full transform origin-left transition-transform duration-500 group-hover:w-full group-hover:bg-secondary" />
+
+                <h3 className="font-heading text-2xl md:text-3xl font-black text-foreground leading-tight mb-1">
+                  {f.title}
+                </h3>
+                <p className={`text-[0.72rem] font-semibold uppercase tracking-widest mb-5 ${f.accent}`}>
+                  {f.tag}
+                </p>
+                <p className="text-muted-foreground leading-relaxed text-sm md:text-base mb-6 max-w-xl">
+                  {f.description}
+                </p>
+
+                {/* Bullets */}
+                <ul className="space-y-2.5">
+                  {f.bullets.map((b) => (
+                    <li key={b} className="flex items-center gap-3 text-sm text-foreground/80">
+                      <span className={`w-1.5 h-1.5 rounded-full flex-shrink-0 ${f.dotColor}`} />
+                      {b}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* Right: large ghost number */}
+              <div
+                className="hidden md:flex items-center justify-center select-none pointer-events-none"
+                aria-hidden
+              >
+                <span
+                  className={`text-[7rem] lg:text-[9rem] font-black leading-none ${f.accent} opacity-[0.07]`}
+                >
+                  {f.number}
+                </span>
               </div>
             </div>
-          ))}
+
+            {/* Progress bar */}
+            <div className="mt-8 h-px bg-border w-full overflow-hidden">
+              <div
+                key={`${active}-${paused}`}
+                className={`h-full rounded-full ${f.dotColor}`}
+                style={{
+                  animation: paused ? "none" : `featProgress ${CARD_INTERVAL}ms linear forwards`,
+                }}
+              />
+            </div>
+          </div>
+
+          {/* Dot indicators */}
+          <div className="flex justify-center gap-2 mt-5">
+            {features.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => goTo(i)}
+                aria-label={`Go to pillar ${i + 1}`}
+                className={`rounded-full transition-all duration-300 ${
+                  i === active
+                    ? `w-6 h-1.5 ${features[active].dotColor}`
+                    : "w-1.5 h-1.5 bg-border hover:bg-muted-foreground"
+                }`}
+              />
+            ))}
+          </div>
         </div>
       </div>
+
+      <style>{`
+        @keyframes featProgress {
+          from { width: 0%; }
+          to   { width: 100%; }
+        }
+      `}</style>
     </section>
   );
 };
 
 export default Features;
-

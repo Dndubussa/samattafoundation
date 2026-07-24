@@ -108,7 +108,7 @@ const Programs = () => {
       />
 
       {/* ── 1. Samatta Nishati Safi Cup - Featured ──────────────────────── */}
-      <section data-reveal className="py-20 bg-white border-b border-border">
+      <section data-reveal className="py-20 bg-card border-b border-border">
         <div className="container mx-auto px-4 max-w-6xl">
           <div className="grid lg:grid-cols-2 gap-14 items-center">
             <div className="reveal-from-left">
@@ -153,7 +153,7 @@ const Programs = () => {
       </section>
 
       {/* ── 2. Nishati Safi Cup - Expected Impact ───────────────────────── */}
-      <section data-reveal className="py-20 bg-zinc-50 border-b border-border">
+      <section data-reveal className="py-20 bg-background border-b border-border">
         <div className="container mx-auto px-4 max-w-6xl">
           <div className="mb-12">
             <span className="section-kicker reveal">Expected Outcomes</span>
@@ -168,7 +168,7 @@ const Programs = () => {
             {nishatiExpectedImpact.map((item, i) => (
               <div
                 key={item.title}
-                className="reveal bg-white rounded-2xl p-6 border border-border hover:border-primary/20 hover:-translate-y-1 transition-all duration-300"
+                className="reveal bg-card rounded-2xl p-6 border border-border shadow-sm hover:border-primary/20 hover:-translate-y-1 hover:shadow-md transition-all duration-300"
                 style={{ transitionDelay: `${i * 80}ms` }}
               >
                 <item.icon className="w-5 h-5 text-secondary mb-4" strokeWidth={1.75} />
@@ -181,7 +181,7 @@ const Programs = () => {
       </section>
 
       {/* ── 3. SamaKiba Nifuate - Overview ──────────────────────────────── */}
-      <section data-reveal className="py-20 bg-white border-b border-border">
+      <section data-reveal className="py-20 bg-card border-b border-border">
         <div className="container mx-auto px-4 max-w-6xl">
           <div className="grid lg:grid-cols-2 gap-14 items-center">
             {/* Image left */}
@@ -191,7 +191,7 @@ const Programs = () => {
                 <div className="absolute bottom-0 left-0 right-0 h-1 bg-primary" />
               </div>
               {/* UN Recognition badge */}
-              <div className="mt-4 flex items-center gap-3 bg-zinc-50 border border-border rounded-xl px-4 py-3">
+              <div className="mt-4 flex items-center gap-3 bg-card border border-border rounded-xl px-4 py-3 shadow-sm">
                 <Award className="w-6 h-6 text-secondary flex-shrink-0" />
                 <p className="text-sm text-muted-foreground">
                   <strong className="text-foreground">UN Tourism Award</strong> - Excellence in Sustainable Sports Tourism
@@ -265,7 +265,7 @@ const Programs = () => {
       </section>
 
       {/* ── 5. Program Highlights (Nifuate) ─────────────────────────────── */}
-      <section data-reveal className="py-20 bg-zinc-50 border-b border-border">
+      <section data-reveal className="py-20 bg-background border-b border-border">
         <div className="container mx-auto px-4 max-w-6xl">
           <div className="mb-12">
             <span className="section-kicker reveal">Initiative Pillars</span>
@@ -278,7 +278,7 @@ const Programs = () => {
             {nifuateHighlights.map((item, i) => (
               <div
                 key={item.title}
-                className="reveal bg-white rounded-2xl p-5 border border-border hover:border-secondary/30 hover:-translate-y-1 transition-all duration-300"
+                className="reveal bg-card rounded-2xl p-5 border border-border shadow-sm hover:border-secondary/30 hover:-translate-y-1 hover:shadow-md transition-all duration-300"
                 style={{ transitionDelay: `${i * 60}ms` }}
               >
                 <item.icon className="w-4 h-4 text-secondary mb-3" strokeWidth={1.75} />
@@ -291,7 +291,7 @@ const Programs = () => {
       </section>
 
       {/* ── 6. Clean Cooking Campaign ────────────────────────────────────── */}
-      <section data-reveal className="py-20 bg-white border-b border-border">
+      <section data-reveal className="py-20 bg-card border-b border-border">
         <div className="container mx-auto px-4 max-w-6xl">
           <div className="grid lg:grid-cols-2 gap-14 items-center">
             <div className="reveal-from-left">
@@ -332,7 +332,7 @@ const Programs = () => {
       </section>
 
       {/* ── 7. Why These Programs Matter ────────────────────────────────── */}
-      <section data-reveal className="py-20 bg-zinc-50 border-b border-border">
+      <section data-reveal className="py-20 bg-background border-b border-border">
         <div className="container mx-auto px-4 max-w-6xl">
           <div className="grid lg:grid-cols-2 gap-14 items-center">
             <div className="reveal-from-left">
@@ -364,7 +364,7 @@ const Programs = () => {
       </section>
 
       {/* ── 8. Gallery strip using available images ──────────────────────── */}
-      <section data-reveal className="py-12 bg-white border-b border-border overflow-hidden">
+      <section data-reveal className="py-12 bg-card border-b border-border overflow-hidden">
         <div className="container mx-auto px-4 max-w-6xl">
           <div className="grid grid-cols-3 md:grid-cols-6 gap-3">
             {[samatta8, samatta9, samatta11, samattaCupImage, samakibaImage, orphanageImage].map((src, i) => (
@@ -377,7 +377,7 @@ const Programs = () => {
       </section>
 
       {/* ── 9. Partners ──────────────────────────────────────────────────── */}
-      <section data-reveal className="py-20 bg-zinc-50 border-b border-border">
+      <section data-reveal className="py-20 bg-background border-b border-border">
         <div className="container mx-auto px-4 max-w-6xl">
           <div className="text-center mb-12">
             <span className="section-kicker reveal">Collaboration</span>
@@ -390,7 +390,7 @@ const Programs = () => {
             {programPartners.map((partner, i) => (
               <div
                 key={partner.name}
-                className="reveal bg-white rounded-2xl p-5 border border-border text-center hover:border-primary/30 hover:-translate-y-1 transition-all duration-300 shadow-sm"
+                className="reveal bg-card rounded-2xl p-5 border border-border shadow-sm text-center hover:border-primary/30 hover:-translate-y-1 hover:shadow-md transition-all duration-300"
                 style={{ transitionDelay: `${i * 60}ms` }}
               >
                 <div className="text-xs font-bold uppercase tracking-widest text-secondary mb-2">{partner.type}</div>

@@ -1,4 +1,4 @@
-﻿import ApplyForm from "@/components/forms/ApplyForm";
+import ApplyForm from "@/components/forms/ApplyForm";
 import PageHero from "@/components/layout/PageHero";
 import SEO from "@/components/SEO";
 
