@@ -8,7 +8,7 @@ const features = [
     icon: Dumbbell,
     accent: "text-amber-500",
     dotColor: "bg-amber-400",
-    borderActive: "border-amber-400/60",
+    borderAccent: "border-amber-400/40 hover:border-amber-400/70",
     title: "Youth & Sports Development",
     tag: "Football for Impact",
     description:
@@ -24,7 +24,7 @@ const features = [
     icon: BookOpen,
     accent: "text-blue-500",
     dotColor: "bg-blue-400",
-    borderActive: "border-blue-400/60",
+    borderAccent: "border-blue-400/40 hover:border-blue-400/70",
     title: "Education Support",
     tag: "Opening Doors",
     description:
@@ -40,7 +40,7 @@ const features = [
     icon: HeartPulse,
     accent: "text-rose-500",
     dotColor: "bg-rose-400",
-    borderActive: "border-rose-400/60",
+    borderAccent: "border-rose-400/40 hover:border-rose-400/70",
     title: "Health & Wellbeing",
     tag: "Healthier Communities",
     description:
@@ -56,7 +56,7 @@ const features = [
     icon: Users,
     accent: "text-emerald-600",
     dotColor: "bg-emerald-400",
-    borderActive: "border-emerald-400/60",
+    borderAccent: "border-emerald-400/40 hover:border-emerald-400/70",
     title: "Social Inclusion & Advocacy",
     tag: "Dignity for All",
     description:
@@ -69,15 +69,20 @@ const features = [
   },
 ];
 
-const CARD_INTERVAL = 4500;
+// Two pairs of cards shown side-by-side
+const pairs = [
+  [features[0], features[1]],
+  [features[2], features[3]],
+];
+
+const INTERVAL_MS = 5500;
 
 const Features = () => {
-  const sectionRef     = useRef<HTMLElement>(null);
-  const [active, setActive]       = useState(0);
-  const [dir, setDir]             = useState<"next" | "prev">("next");
-  const [animating, setAnimating] = useState(false);
-  const [visible, setVisible]     = useState(false);
-  const [paused, setPaused]       = useState(false);
+  const sectionRef = useRef<HTMLElement>(null);
+  const [pair, setPair]       = useState(0);
+  const [dir, setDir]         = useState<"next" | "prev">("next");
+  const [visible, setVisible] = useState(false);
+  const [paused, setPaused]   = useState(false);
 
   /* Scroll reveal */
   useEffect(() => {
@@ -96,38 +101,18 @@ const Features = () => {
     if (paused) return;
     const t = setInterval(() => {
       setDir("next");
-      setAnimating(true);
-      setTimeout(() => {
-        setActive(a => (a + 1) % features.length);
-        setAnimating(false);
-      }, 320);
-    }, CARD_INTERVAL);
+      setPair(p => (p + 1) % pairs.length);
+    }, INTERVAL_MS);
     return () => clearInterval(t);
   }, [paused]);
 
-  const goTo = (idx: number) => {
-    if (idx === active || animating) return;
-    setDir(idx > active ? "next" : "prev");
-    setAnimating(true);
-    setTimeout(() => {
-      setActive(idx);
-      setAnimating(false);
-    }, 320);
+  const go = (d: 1 | -1) => {
+    setDir(d === 1 ? "next" : "prev");
+    setPair(p => (p + d + pairs.length) % pairs.length);
   };
 
-  const step = (d: 1 | -1) => {
-    const next = (active + d + features.length) % features.length;
-    goTo(next);
-  };
-
-  const f = features[active];
-  const Icon = f.icon;
-
-  const slideClass = animating
-    ? dir === "next"
-      ? "translate-x-6 opacity-0"
-      : "-translate-x-6 opacity-0"
-    : "translate-x-0 opacity-100";
+  const animClass =
+    dir === "next" ? "animate-slide-from-right" : "animate-slide-from-left";
 
   return (
     <section
@@ -164,139 +149,131 @@ const Features = () => {
           </div>
         </div>
 
-        {/* Tab buttons */}
+        {/* Card viewport — overflow hidden for slide */}
         <div
-          className={`flex flex-wrap gap-2 mb-8 transition-all duration-700 delay-100 ${
+          className={`relative overflow-hidden transition-all duration-700 delay-100 ${
             visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-5"
           }`}
         >
-          {features.map((feat, i) => {
-            const TabIcon = feat.icon;
-            const isActive = i === active;
-            return (
-              <button
-                key={feat.number}
-                onClick={() => goTo(i)}
-                className={`flex items-center gap-2 px-4 py-2 rounded-full border text-sm font-semibold transition-all duration-300 ${
-                  isActive
-                    ? `bg-foreground text-white border-foreground shadow-md scale-[1.03]`
-                    : "bg-card border-border text-muted-foreground hover:border-foreground/30 hover:text-foreground"
-                }`}
-              >
-                <TabIcon className={`w-3.5 h-3.5 ${isActive ? "text-white" : feat.accent}`} strokeWidth={2} />
-                <span className="hidden sm:inline">{feat.number}</span>
-                <span className="hidden md:inline text-xs">
-                  {feat.title.split(" ").slice(0, 2).join(" ")}
-                </span>
-              </button>
-            );
-          })}
+          {/* Animated pair */}
+          <div
+            key={pair}
+            className={`grid grid-cols-1 sm:grid-cols-2 gap-5 ${animClass}`}
+          >
+            {pairs[pair].map((f) => {
+              const Icon = f.icon;
+              return (
+                <div
+                  key={f.number}
+                  className={`bg-card rounded-2xl border ${f.borderAccent} p-6 md:p-8 flex flex-col gap-4 shadow-sm hover:-translate-y-1 hover:shadow-lg transition-all duration-300`}
+                >
+                  {/* Header row: icon + ghost number */}
+                  <div className="flex items-start justify-between">
+                    <Icon className={`w-6 h-6 ${f.accent}`} strokeWidth={1.75} />
+                    <span className={`text-4xl font-black leading-none select-none ${f.accent} opacity-[0.12]`}>
+                      {f.number}
+                    </span>
+                  </div>
 
-          <div className="flex items-center gap-1.5 ml-auto">
-            <button
-              onClick={() => step(-1)}
-              aria-label="Previous pillar"
-              className="w-8 h-8 rounded-full border border-border flex items-center justify-center text-muted-foreground hover:bg-card hover:text-foreground transition-all duration-200"
-            >
-              <ChevronLeft className="w-3.5 h-3.5" />
-            </button>
-            <button
-              onClick={() => step(1)}
-              aria-label="Next pillar"
-              className="w-8 h-8 rounded-full border border-border flex items-center justify-center text-muted-foreground hover:bg-card hover:text-foreground transition-all duration-200"
-            >
-              <ChevronRight className="w-3.5 h-3.5" />
-            </button>
+                  {/* Title + tag */}
+                  <div>
+                    <h3 className="font-heading text-lg md:text-xl font-bold text-foreground leading-snug mb-0.5">
+                      {f.title}
+                    </h3>
+                    <p className={`text-[0.7rem] font-semibold uppercase tracking-widest ${f.accent}`}>
+                      {f.tag}
+                    </p>
+                  </div>
+
+                  {/* Description */}
+                  <p className="text-[0.83rem] text-muted-foreground leading-relaxed flex-1">
+                    {f.description}
+                  </p>
+
+                  {/* Bullets */}
+                  <ul className="space-y-1.5 pt-3 border-t border-border/60">
+                    {f.bullets.map((b) => (
+                      <li key={b} className="flex items-center gap-2.5 text-[0.78rem] text-foreground/70">
+                        <span className={`w-1 h-1 rounded-full flex-shrink-0 ${f.dotColor}`} />
+                        {b}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              );
+            })}
           </div>
         </div>
 
-        {/* Animated content card */}
+        {/* Controls: dots + arrows */}
         <div
-          className={`transition-all duration-700 delay-150 ${
+          className={`flex items-center justify-between mt-8 transition-all duration-700 delay-200 ${
             visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-5"
           }`}
         >
-          <div
-            className={`bg-card border ${f.borderActive} rounded-2xl p-7 md:p-10 shadow-sm transition-all duration-300 ease-out ${slideClass}`}
-          >
-            <div className="grid md:grid-cols-[1fr_auto] gap-8 items-start">
-
-              {/* Left: content */}
-              <div>
-                {/* Icon + number row */}
-                <div className="flex items-center gap-3 mb-5">
-                  <Icon className={`w-6 h-6 ${f.accent}`} strokeWidth={1.75} />
-                  <span className={`text-[0.7rem] font-black uppercase tracking-[0.35em] ${f.accent} opacity-50`}>
-                    {f.number}
-                  </span>
-                </div>
-
-                <h3 className="font-heading text-2xl md:text-3xl font-black text-foreground leading-tight mb-1">
-                  {f.title}
-                </h3>
-                <p className={`text-[0.72rem] font-semibold uppercase tracking-widest mb-5 ${f.accent}`}>
-                  {f.tag}
-                </p>
-                <p className="text-muted-foreground leading-relaxed text-sm md:text-base mb-6 max-w-xl">
-                  {f.description}
-                </p>
-
-                {/* Bullets */}
-                <ul className="space-y-2.5">
-                  {f.bullets.map((b) => (
-                    <li key={b} className="flex items-center gap-3 text-sm text-foreground/80">
-                      <span className={`w-1.5 h-1.5 rounded-full flex-shrink-0 ${f.dotColor}`} />
-                      {b}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              {/* Right: large ghost number */}
-              <div
-                className="hidden md:flex items-center justify-center select-none pointer-events-none"
-                aria-hidden
-              >
-                <span
-                  className={`text-[7rem] lg:text-[9rem] font-black leading-none ${f.accent} opacity-[0.07]`}
-                >
-                  {f.number}
-                </span>
-              </div>
-            </div>
-
-            {/* Progress bar */}
-            <div className="mt-8 h-px bg-border w-full overflow-hidden">
-              <div
-                key={`${active}-${paused}`}
-                className={`h-full rounded-full ${f.dotColor}`}
-                style={{
-                  animation: paused ? "none" : `featProgress ${CARD_INTERVAL}ms linear forwards`,
-                }}
-              />
-            </div>
-          </div>
-
           {/* Dot indicators */}
-          <div className="flex justify-center gap-2 mt-5">
-            {features.map((_, i) => (
+          <div className="flex items-center gap-2">
+            {pairs.map((_, i) => (
               <button
                 key={i}
-                onClick={() => goTo(i)}
-                aria-label={`Go to pillar ${i + 1}`}
+                onClick={() => { setDir(i > pair ? "next" : "prev"); setPair(i); }}
+                aria-label={`Show pair ${i + 1}`}
                 className={`rounded-full transition-all duration-300 ${
-                  i === active
-                    ? `w-6 h-1.5 ${features[active].dotColor}`
+                  i === pair
+                    ? "w-7 h-1.5 bg-primary"
                     : "w-1.5 h-1.5 bg-border hover:bg-muted-foreground"
                 }`}
               />
             ))}
           </div>
+
+          {/* Progress bar */}
+          <div className="flex-1 mx-6 h-px bg-border overflow-hidden">
+            <div
+              key={`${pair}-${paused}`}
+              className="h-full bg-primary rounded-full"
+              style={{
+                animation: paused ? "none" : `featProg ${INTERVAL_MS}ms linear forwards`,
+              }}
+            />
+          </div>
+
+          {/* Arrows */}
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => go(-1)}
+              aria-label="Previous pair"
+              className="w-9 h-9 rounded-full border border-border flex items-center justify-center text-muted-foreground hover:bg-card hover:text-foreground hover:border-foreground/20 active:scale-95 transition-all duration-200"
+            >
+              <ChevronLeft className="w-4 h-4" />
+            </button>
+            <button
+              onClick={() => go(1)}
+              aria-label="Next pair"
+              className="w-9 h-9 rounded-full border border-border flex items-center justify-center text-muted-foreground hover:bg-card hover:text-foreground hover:border-foreground/20 active:scale-95 transition-all duration-200"
+            >
+              <ChevronRight className="w-4 h-4" />
+            </button>
+          </div>
         </div>
       </div>
 
       <style>{`
-        @keyframes featProgress {
+        @keyframes slideFromRight {
+          from { transform: translateX(48px); opacity: 0; }
+          to   { transform: translateX(0);   opacity: 1; }
+        }
+        @keyframes slideFromLeft {
+          from { transform: translateX(-48px); opacity: 0; }
+          to   { transform: translateX(0);     opacity: 1; }
+        }
+        .animate-slide-from-right {
+          animation: slideFromRight 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+        }
+        .animate-slide-from-left {
+          animation: slideFromLeft 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+        }
+        @keyframes featProg {
           from { width: 0%; }
           to   { width: 100%; }
         }
