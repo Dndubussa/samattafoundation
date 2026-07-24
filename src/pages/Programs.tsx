@@ -10,7 +10,8 @@ import PageHero from "@/components/layout/PageHero";
 
 // Images
 import samattaCupImage from "@/assets/NISHATI SAFI CUP.png";
-import samakibaImage from "@/assets/Nifuate.jpg";
+import samakibaImage from "@/assets/Nifuate.png";
+import samakibaImageSecondary from "@/assets/Nifuate 2.png";
 import orphanageImage from "@/assets/SAMATTA (10).jpg"; // retained for other uses
 import oryxEnergies from "@/assets/partners/oryx-energies.png";
 import samatta8 from "@/assets/SAMATTA (8).jpg";
@@ -187,8 +188,12 @@ const Programs = () => {
             {/* Image left */}
             <div className="reveal-from-left">
               <div className="relative overflow-hidden rounded-2xl shadow-md">
-                <img src={samakibaImage} alt="SamaKiba Nifuate" className="w-full h-auto object-cover" loading="lazy" decoding="async" />
+                <img src={samakibaImage} alt="SamaKiba Nifuate charity initiative" className="w-full h-auto object-cover" loading="lazy" decoding="async" />
                 <div className="absolute bottom-0 left-0 right-0 h-1 bg-primary" />
+              </div>
+              <div className="relative mt-4 overflow-hidden rounded-2xl shadow-md">
+                <img src={samakibaImageSecondary} alt="SamaKiba Nifuate community impact" className="w-full h-auto object-cover" loading="lazy" decoding="async" />
+                <div className="absolute bottom-0 left-0 right-0 h-1 bg-secondary" />
               </div>
               {/* UN Recognition badge */}
               <div className="mt-4 flex items-center gap-3 bg-card border border-border rounded-xl px-4 py-3 shadow-sm">
