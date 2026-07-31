@@ -1,8 +1,8 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
 import { Button } from "@/components/ui/button";
 import {
-  ArrowRight, Trophy, Users, Heart, Calendar, MapPin,
-  Leaf, Globe, Star, Award, Zap, HandHeart, Building2,
+  ArrowRight, Trophy, Users, Heart,
+  Leaf, Globe, Award, Zap, HandHeart, Building2, ChevronLeft, ChevronRight,
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import SEO from "@/components/SEO";
@@ -12,11 +12,115 @@ import PageHero from "@/components/layout/PageHero";
 import samattaCupImage from "@/assets/NISHATI SAFI CUP.png";
 import samakibaImage from "@/assets/Nifuate.png";
 import samakibaImageSecondary from "@/assets/Nifuate 2.png";
-import orphanageImage from "@/assets/SAMATTA (10).jpg"; // retained for other uses
+import orphanageImage from "@/assets/SAMATTA (10).jpg";
 import oryxEnergies from "@/assets/partners/oryx-energies.png";
 import samatta8 from "@/assets/SAMATTA (8).jpg";
 import samatta9 from "@/assets/SAMATTA (9).jpg";
 import samatta11 from "@/assets/SAMATTA (11).jpg";
+
+// Nifuate event images
+import nif1 from "@/assets/NIFUATE IMAGES/Samakiba (1).jpeg";
+import nif2 from "@/assets/NIFUATE IMAGES/Samakiba (2).jpeg";
+import nif3 from "@/assets/NIFUATE IMAGES/Samakiba (3).jpeg";
+import nif4 from "@/assets/NIFUATE IMAGES/Samakiba (4).jpeg";
+import nif5 from "@/assets/NIFUATE IMAGES/Samakiba (5).jpeg";
+
+const nifuateSlides = [nif2, nif3, nif4, nif1, nif5];
+
+// Mini slideshow for the Nifuate section
+const NifuateGallery = () => {
+  const [active, setActive] = useState(0);
+  const [paused, setPaused] = useState(false);
+  const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
+
+  const go = useCallback((dir: 1 | -1) => {
+    setActive(c => (c + dir + nifuateSlides.length) % nifuateSlides.length);
+  }, []);
+
+  useEffect(() => {
+    if (paused) { if (timerRef.current) clearInterval(timerRef.current); return; }
+    timerRef.current = setInterval(() => go(1), 4000);
+    return () => { if (timerRef.current) clearInterval(timerRef.current); };
+  }, [paused, go]);
+
+  return (
+    <div
+      className="flex flex-col gap-3"
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => setPaused(false)}
+    >
+      {/* Main image */}
+      <div className="relative overflow-hidden rounded-2xl shadow-lg bg-foreground" style={{ aspectRatio: "16/10" }}>
+        {nifuateSlides.map((src, i) => (
+          <img
+            key={i}
+            src={src}
+            alt={`SamaKiba Nifuate - moment ${i + 1}`}
+            loading={i === 0 ? "eager" : "lazy"}
+            decoding="async"
+            className="absolute inset-0 w-full h-full object-cover"
+            style={{
+              opacity: i === active ? 1 : 0,
+              transition: "opacity 0.8s cubic-bezier(0.4,0,0.2,1)",
+              willChange: "opacity",
+            }}
+          />
+        ))}
+        {/* Arrows */}
+        <button onClick={() => go(-1)} aria-label="Previous" className="absolute left-3 top-1/2 -translate-y-1/2 z-10 w-8 h-8 rounded-full bg-black/40 flex items-center justify-center text-white hover:bg-black/60 transition-colors">
+          <ChevronLeft className="w-4 h-4" />
+        </button>
+        <button onClick={() => go(1)} aria-label="Next" className="absolute right-3 top-1/2 -translate-y-1/2 z-10 w-8 h-8 rounded-full bg-black/40 flex items-center justify-center text-white hover:bg-black/60 transition-colors">
+          <ChevronRight className="w-4 h-4" />
+        </button>
+        {/* Counter */}
+        <div className="absolute bottom-3 right-3 z-10 bg-black/50 rounded-full px-2.5 py-0.5 text-white text-xs font-mono">
+          {active + 1} / {nifuateSlides.length}
+        </div>
+        {/* Bottom accent */}
+        <div className="absolute bottom-0 left-0 right-0 h-1 bg-primary" />
+      </div>
+
+      {/* Thumbnail strip */}
+      <div className="grid grid-cols-5 gap-2">
+        {nifuateSlides.map((src, i) => (
+          <button
+            key={i}
+            onClick={() => setActive(i)}
+            aria-label={`View image ${i + 1}`}
+            className={`relative overflow-hidden rounded-xl transition-all duration-200 ${
+              i === active
+                ? "ring-2 ring-primary ring-offset-2 ring-offset-card scale-[1.04]"
+                : "opacity-60 hover:opacity-90"
+            }`}
+            style={{ aspectRatio: "1" }}
+          >
+            <img
+              src={src}
+              alt={`Thumbnail ${i + 1}`}
+              loading="lazy"
+              decoding="async"
+              className="w-full h-full object-cover"
+            />
+          </button>
+        ))}
+      </div>
+
+      {/* Progress bar */}
+      <div className="h-px bg-border overflow-hidden rounded-full">
+        <div
+          key={`${active}-${paused}`}
+          className="h-full bg-primary rounded-full"
+          style={{ animation: paused ? "none" : "nifProg 4000ms linear forwards" }}
+        />
+      </div>
+
+      <style>{`
+        @keyframes nifProg { from { width: 0% } to { width: 100% } }
+      `}</style>
+    </div>
+  );
+};
 
 // ─── Data ────────────────────────────────────────────────────────────────────
 
@@ -185,18 +289,11 @@ const Programs = () => {
       <section data-reveal className="py-20 bg-card border-b border-border">
         <div className="container mx-auto px-4 max-w-6xl">
           <div className="grid lg:grid-cols-2 gap-14 items-center">
-            {/* Image left */}
-            <div className="reveal-from-left">
-              <div className="relative overflow-hidden rounded-2xl shadow-md">
-                <img src={samakibaImage} alt="SamaKiba Nifuate charity initiative" className="w-full h-auto object-cover" loading="lazy" decoding="async" />
-                <div className="absolute bottom-0 left-0 right-0 h-1 bg-primary" />
-              </div>
-              <div className="relative mt-4 overflow-hidden rounded-2xl shadow-md">
-                <img src={samakibaImageSecondary} alt="SamaKiba Nifuate community impact" className="w-full h-auto object-cover" loading="lazy" decoding="async" />
-                <div className="absolute bottom-0 left-0 right-0 h-1 bg-secondary" />
-              </div>
+            {/* Image left - Nifuate gallery slideshow */}
+            <div className="reveal-from-left flex flex-col gap-4">
+              <NifuateGallery />
               {/* UN Recognition badge */}
-              <div className="mt-4 flex items-center gap-3 bg-card border border-border rounded-xl px-4 py-3 shadow-sm">
+              <div className="flex items-center gap-3 bg-card border border-border rounded-xl px-4 py-3 shadow-sm">
                 <Award className="w-6 h-6 text-secondary flex-shrink-0" />
                 <p className="text-sm text-muted-foreground">
                   <strong className="text-foreground">UN Tourism Award</strong> - Excellence in Sustainable Sports Tourism
@@ -372,7 +469,7 @@ const Programs = () => {
       <section data-reveal className="py-12 bg-card border-b border-border overflow-hidden">
         <div className="container mx-auto px-4 max-w-6xl">
           <div className="grid grid-cols-3 md:grid-cols-6 gap-3">
-            {[samatta8, samatta9, samatta11, samattaCupImage, samakibaImage, orphanageImage].map((src, i) => (
+            {[samatta8, samatta9, samatta11, samattaCupImage, orphanageImage].map((src, i) => (
               <div key={i} className="reveal aspect-square overflow-hidden rounded-xl" style={{ transitionDelay: `${i * 60}ms` }}>
                 <img src={src} alt={`Foundation moment ${i + 1}`} className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" loading="lazy" decoding="async" />
               </div>
