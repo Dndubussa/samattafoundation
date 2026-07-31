@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState, useCallback } from "react";
 import { Button } from "@/components/ui/button";
 import {
-  ArrowRight, Trophy, Users, Heart,
+  ArrowRight, Trophy, Users, Heart, Calendar, MapPin,
   Leaf, Globe, Award, Zap, HandHeart, Building2, ChevronLeft, ChevronRight,
 } from "lucide-react";
 import { Link } from "react-router-dom";
