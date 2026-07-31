@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import { Link } from "react-router-dom";
-import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
 import sports1 from "@/assets/SPORTS/SPORTS (1).jpeg";
 import sports2 from "@/assets/SPORTS/SPORTS (2).jpeg";
@@ -61,22 +61,65 @@ const pillars = [
 
 const SLIDE_MS = 4500;
 
+const PillarItem = ({
+  p,
+  borderBottom,
+  alignRight,
+}: {
+  p: (typeof pillars)[0];
+  borderBottom?: boolean;
+  alignRight?: boolean;
+}) => (
+  <div
+    className={`py-7 flex-1 ${borderBottom ? "border-b border-border" : ""} ${
+      alignRight ? "text-right" : ""
+    }`}
+  >
+    <div
+      className={`flex items-baseline gap-3 mb-2 ${
+        alignRight ? "flex-row-reverse" : ""
+      }`}
+    >
+      <span className="text-[0.68rem] font-black tracking-widest text-foreground/25 select-none">
+        {p.number}
+      </span>
+      <h3 className="font-heading text-base font-bold text-foreground leading-tight">
+        {p.title}
+      </h3>
+    </div>
+    <p className="text-[0.82rem] text-muted-foreground leading-relaxed mb-4">
+      {p.description}
+    </p>
+    <ul className={`space-y-1.5 ${alignRight ? "items-end" : ""}`}>
+      {p.items.map((item) => (
+        <li
+          key={item}
+          className={`flex items-start gap-2 text-[0.78rem] text-foreground/80 ${
+            alignRight ? "flex-row-reverse" : ""
+          }`}
+        >
+          <span className="w-1 h-1 rounded-full bg-foreground/40 flex-shrink-0 mt-1.5" />
+          {item}
+        </li>
+      ))}
+    </ul>
+  </div>
+);
+
 const Features = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const [slide, setSlide]     = useState(0);
-  const [paused, setPaused]   = useState(false);
   const [visible, setVisible] = useState(false);
-  const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
-  const go = useCallback((d: 1 | -1) => {
-    setSlide(s => (s + d + sportsSlides.length) % sportsSlides.length);
+  const go = useCallback(() => {
+    setSlide(s => (s + 1) % sportsSlides.length);
   }, []);
 
+  /* Auto-slide only — no arrows */
   useEffect(() => {
-    if (paused) { if (timerRef.current) clearInterval(timerRef.current); return; }
-    timerRef.current = setInterval(() => go(1), SLIDE_MS);
-    return () => { if (timerRef.current) clearInterval(timerRef.current); };
-  }, [paused, go]);
+    const t = setInterval(go, SLIDE_MS);
+    return () => clearInterval(t);
+  }, [go]);
 
   useEffect(() => {
     const el = sectionRef.current;
@@ -90,135 +133,131 @@ const Features = () => {
   }, []);
 
   return (
-    <section
-      ref={sectionRef}
-      id="programs"
-      className="py-24 bg-background"
-      onMouseEnter={() => setPaused(true)}
-      onMouseLeave={() => setPaused(false)}
-    >
+    <section ref={sectionRef} id="programs" className="py-24 bg-background">
       <div className="container mx-auto px-4 sm:px-6 max-w-6xl">
 
-        {/* Header */}
+        {/* Centered header */}
         <div
-          className={`flex flex-col md:flex-row md:items-end justify-between gap-4 mb-14 transition-all duration-700 ${
+          className={`text-center mb-14 transition-all duration-700 ${
             visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-5"
           }`}
         >
-          <div className="max-w-xl">
-            <span className="section-kicker">Our Focus Areas</span>
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-heading font-black text-foreground mb-3">
-              Creating Lasting Impact
-            </h2>
-            <p className="text-muted-foreground text-base md:text-lg">
-              Four interconnected pillars that build pathways for Tanzania's youth to reach their full potential.
-            </p>
-          </div>
+          <span className="section-kicker">Our Focus Areas</span>
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-heading font-black text-foreground mb-3">
+            Creating Lasting Impact
+          </h2>
+          <p className="text-muted-foreground text-base md:text-lg max-w-2xl mx-auto mb-5">
+            Four interconnected pillars that build pathways for Tanzania's youth to reach their full potential.
+          </p>
           <Link
             to="/programs"
-            className="inline-flex items-center gap-2 text-foreground font-bold text-sm hover:gap-3 transition-all duration-200 flex-shrink-0"
+            className="inline-flex items-center gap-2 text-foreground font-bold text-sm hover:gap-3 transition-all duration-200"
           >
             View all programs <ArrowRight className="w-4 h-4" />
           </Link>
         </div>
 
-        {/* ── Main grid: image left, lists right ── */}
+        {/* ── 3-column: [01+03] | [image] | [02+04] ── */}
         <div
-          className={`grid lg:grid-cols-[1fr_1.1fr] gap-10 lg:gap-14 items-start transition-all duration-700 delay-100 ${
+          className={`transition-all duration-700 delay-100 ${
             visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-5"
           }`}
         >
-          {/* Left: sports image slideshow */}
-          <div
-            className="relative overflow-hidden rounded-2xl shadow-md bg-foreground sticky top-24"
-            style={{ aspectRatio: "4/5" }}
-          >
-            {sportsSlides.map((src, i) => (
-              <img
-                key={i}
-                src={src}
-                alt={`Samatta Foundation sports - ${i + 1}`}
-                loading={i === 0 ? "eager" : "lazy"}
-                decoding="async"
-                className="absolute inset-0 w-full h-full object-cover"
-                style={{
-                  opacity: i === slide ? 1 : 0,
-                  transition: "opacity 1s cubic-bezier(0.4,0,0.2,1)",
-                  willChange: "opacity",
-                }}
-              />
-            ))}
+          {/* Desktop 3-col */}
+          <div className="hidden lg:grid lg:grid-cols-[1fr_300px_1fr] gap-x-8 items-stretch">
 
-            {/* Arrows */}
-            <button
-              onClick={() => go(-1)}
-              aria-label="Previous"
-              className="absolute left-3 top-1/2 -translate-y-1/2 z-10 w-9 h-9 rounded-full bg-black/40 flex items-center justify-center text-white hover:bg-black/60 transition-colors"
-            >
-              <ChevronLeft className="w-4 h-4" />
-            </button>
-            <button
-              onClick={() => go(1)}
-              aria-label="Next"
-              className="absolute right-3 top-1/2 -translate-y-1/2 z-10 w-9 h-9 rounded-full bg-black/40 flex items-center justify-center text-white hover:bg-black/60 transition-colors"
-            >
-              <ChevronRight className="w-4 h-4" />
-            </button>
-
-            {/* Dots */}
-            <div className="absolute bottom-4 left-0 right-0 flex justify-center gap-1.5 z-10">
-              {sportsSlides.map((_, i) => (
-                <button
-                  key={i}
-                  onClick={() => setSlide(i)}
-                  aria-label={`Image ${i + 1}`}
-                  className={`rounded-full transition-all duration-300 ${
-                    i === slide ? "w-5 h-1.5 bg-white" : "w-1.5 h-1.5 bg-white/40 hover:bg-white/70"
-                  }`}
-                />
-              ))}
+            {/* Left: 01 + 03 */}
+            <div className="flex flex-col">
+              <PillarItem p={pillars[0]} borderBottom />
+              <PillarItem p={pillars[2]} />
             </div>
 
-            {/* Counter */}
-            <div className="absolute top-3 right-3 z-10 bg-black/50 rounded-full px-2.5 py-0.5 text-white text-xs font-mono">
-              {slide + 1} / {sportsSlides.length}
+            {/* Center: image slideshow — object-contain, full image visible */}
+            <div className="relative rounded-2xl overflow-hidden bg-neutral-100/80 shadow-md">
+              {sportsSlides.map((src, i) => (
+                <img
+                  key={i}
+                  src={src}
+                  alt={`Sports moment ${i + 1}`}
+                  loading={i === 0 ? "eager" : "lazy"}
+                  decoding="async"
+                  className="absolute inset-0 w-full h-full"
+                  style={{
+                    objectFit: "contain",
+                    objectPosition: "center",
+                    opacity: i === slide ? 1 : 0,
+                    transition: "opacity 1.1s cubic-bezier(0.4,0,0.2,1)",
+                    willChange: "opacity",
+                  }}
+                />
+              ))}
+
+              {/* Dot indicators only */}
+              <div className="absolute bottom-3 left-0 right-0 flex justify-center gap-1.5 z-10">
+                {sportsSlides.map((_, i) => (
+                  <button
+                    key={i}
+                    onClick={() => setSlide(i)}
+                    aria-label={`Image ${i + 1}`}
+                    className={`rounded-full transition-all duration-300 ${
+                      i === slide
+                        ? "w-4 h-1.5 bg-foreground"
+                        : "w-1.5 h-1.5 bg-foreground/25 hover:bg-foreground/50"
+                    }`}
+                  />
+                ))}
+              </div>
+            </div>
+
+            {/* Right: 02 + 04 */}
+            <div className="flex flex-col">
+              <PillarItem p={pillars[1]} borderBottom alignRight />
+              <PillarItem p={pillars[3]} alignRight />
             </div>
           </div>
 
-          {/* Right: two-column pillar lists */}
-          <div className="grid sm:grid-cols-2 gap-x-8 gap-y-0">
-            {pillars.map((p, idx) => (
-              <div
-                key={p.number}
-                className={`py-7 ${
-                  idx < pillars.length - 2 ? "border-b border-border" : ""
-                } ${idx % 2 === 0 && idx < pillars.length - 1 ? "sm:border-r sm:pr-8 sm:border-border" : "sm:pl-8"}`}
-              >
-                {/* Number + title */}
-                <div className="flex items-baseline gap-3 mb-2">
-                  <span className="text-[0.68rem] font-black tracking-widest text-foreground/25 select-none">
-                    {p.number}
-                  </span>
-                  <h3 className="font-heading text-base font-bold text-foreground leading-tight">
-                    {p.title}
-                  </h3>
-                </div>
-
-                {/* Description */}
-                <p className="text-[0.82rem] text-muted-foreground leading-relaxed mb-4">
-                  {p.description}
-                </p>
-
-                {/* Bullet list */}
-                <ul className="space-y-1.5">
-                  {p.items.map((item) => (
-                    <li key={item} className="flex items-start gap-2 text-[0.78rem] text-foreground/80">
-                      <span className="w-1 h-1 rounded-full bg-foreground/40 flex-shrink-0 mt-1.5" />
-                      {item}
-                    </li>
-                  ))}
-                </ul>
+          {/* Mobile: single column list + image strip */}
+          <div className="lg:hidden space-y-0">
+            {/* Image */}
+            <div
+              className="relative rounded-2xl overflow-hidden bg-neutral-100/80 shadow-md mb-8"
+              style={{ aspectRatio: "16/9" }}
+            >
+              {sportsSlides.map((src, i) => (
+                <img
+                  key={i}
+                  src={src}
+                  alt={`Sports moment ${i + 1}`}
+                  loading={i === 0 ? "eager" : "lazy"}
+                  className="absolute inset-0 w-full h-full"
+                  style={{
+                    objectFit: "contain",
+                    opacity: i === slide ? 1 : 0,
+                    transition: "opacity 1.1s cubic-bezier(0.4,0,0.2,1)",
+                  }}
+                />
+              ))}
+              <div className="absolute bottom-3 left-0 right-0 flex justify-center gap-1.5 z-10">
+                {sportsSlides.map((_, i) => (
+                  <button
+                    key={i}
+                    onClick={() => setSlide(i)}
+                    aria-label={`Image ${i + 1}`}
+                    className={`rounded-full transition-all duration-300 ${
+                      i === slide ? "w-4 h-1.5 bg-foreground" : "w-1.5 h-1.5 bg-foreground/25"
+                    }`}
+                  />
+                ))}
               </div>
+            </div>
+
+            {/* Pillars stacked */}
+            {pillars.map((p, idx) => (
+              <PillarItem
+                key={p.number}
+                p={p}
+                borderBottom={idx < pillars.length - 1}
+              />
             ))}
           </div>
         </div>

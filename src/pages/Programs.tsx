@@ -2,7 +2,7 @@ import { useEffect, useRef, useState, useCallback } from "react";
 import { Button } from "@/components/ui/button";
 import {
   ArrowRight, Trophy, Users, Heart, Calendar, MapPin,
-  Leaf, Globe, Award, Zap, HandHeart, Building2, ChevronLeft, ChevronRight,
+  Leaf, Globe, Award, Zap, HandHeart, Building2,
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import SEO from "@/components/SEO";
@@ -66,13 +66,6 @@ const NifuateGallery = () => {
             }}
           />
         ))}
-        {/* Arrows */}
-        <button onClick={() => go(-1)} aria-label="Previous" className="absolute left-3 top-1/2 -translate-y-1/2 z-10 w-8 h-8 rounded-full bg-black/40 flex items-center justify-center text-white hover:bg-black/60 transition-colors">
-          <ChevronLeft className="w-4 h-4" />
-        </button>
-        <button onClick={() => go(1)} aria-label="Next" className="absolute right-3 top-1/2 -translate-y-1/2 z-10 w-8 h-8 rounded-full bg-black/40 flex items-center justify-center text-white hover:bg-black/60 transition-colors">
-          <ChevronRight className="w-4 h-4" />
-        </button>
         {/* Counter */}
         <div className="absolute bottom-3 right-3 z-10 bg-black/50 rounded-full px-2.5 py-0.5 text-white text-xs font-mono">
           {active + 1} / {nifuateSlides.length}

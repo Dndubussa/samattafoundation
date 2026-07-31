@@ -1,5 +1,4 @@
 import { useState, useEffect, useRef, useCallback } from "react";
-import { ChevronLeft, ChevronRight } from "lucide-react";
 
 import img120 from "@/assets/NISHATI SAFI CUP/img120.jpg";
 import img204 from "@/assets/NISHATI SAFI CUP/img204.jpg";
@@ -90,25 +89,11 @@ const Gallery = () => {
             </p>
           </div>
 
-          {/* Counter + arrows */}
+          {/* Counter only */}
           <div className="flex items-center gap-3 flex-shrink-0">
             <span className="text-white/40 text-xs font-mono tracking-widest tabular-nums">
               {String(featured + 1).padStart(2, "0")} / {String(slides.length).padStart(2, "0")}
             </span>
-            <button
-              onClick={() => go(-1)}
-              aria-label="Previous"
-              className="w-9 h-9 rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-white/10 hover:border-white/40 active:scale-95 transition-all duration-200"
-            >
-              <ChevronLeft className="w-4 h-4" />
-            </button>
-            <button
-              onClick={() => go(1)}
-              aria-label="Next"
-              className="w-9 h-9 rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-white/10 hover:border-white/40 active:scale-95 transition-all duration-200"
-            >
-              <ChevronRight className="w-4 h-4" />
-            </button>
           </div>
         </div>
 
