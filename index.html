@@ -55,6 +55,90 @@
     <!-- Geographic Meta -->
     <meta name="geo.region" content="TZ" />
     <meta name="geo.placename" content="Dar es Salaam, Tanzania" />
+
+    <!-- Structured Data: WebSite (enables SiteLinks search box in Google) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Samatta Foundation",
+      "alternateName": "Samatta Foundation Tanzania",
+      "url": "https://samattafoundation.or.tz/",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": {
+          "@type": "EntryPoint",
+          "urlTemplate": "https://samattafoundation.or.tz/?q={search_term_string}"
+        },
+        "query-input": "required name=search_term_string"
+      }
+    }
+    </script>
+
+    <!-- Structured Data: Organization -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "NGO",
+      "name": "Samatta Foundation",
+      "alternateName": "Samatta Foundation Tanzania",
+      "url": "https://samattafoundation.or.tz/",
+      "logo": "https://samattafoundation.or.tz/samatta-foundation-logo.png",
+      "image": "https://samattafoundation.or.tz/samatta-foundation-logo.png",
+      "description": "The Samatta Foundation empowers Tanzanian youth through football, education, health, and community development initiatives founded by Mbwana Ally Samatta.",
+      "foundingDate": "2016",
+      "foundingLocation": {
+        "@type": "Place",
+        "name": "Dar es Salaam, Tanzania"
+      },
+      "founder": {
+        "@type": "Person",
+        "name": "Mbwana Ally Samatta"
+      },
+      "areaServed": {
+        "@type": "Country",
+        "name": "Tanzania"
+      },
+      "sameAs": [
+        "https://www.facebook.com/SamattaFoundation",
+        "https://twitter.com/SamattaFdn",
+        "https://www.instagram.com/samattafoundation"
+      ],
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "General Enquiries",
+        "url": "https://samattafoundation.or.tz/contact"
+      },
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Programs",
+        "itemListElement": [
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Youth & Sports Development" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Education Support" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Health & Wellbeing" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Social Inclusion & Advocacy" } }
+        ]
+      }
+    }
+    </script>
+
+    <!-- Structured Data: SiteLinks navigation -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ItemList",
+      "name": "Samatta Foundation Site Navigation",
+      "itemListElement": [
+        { "@type": "SiteLinksSearchBox", "url": "https://samattafoundation.or.tz/", "name": "Home" },
+        { "@type": "ListItem", "position": 1, "name": "About Us", "url": "https://samattafoundation.or.tz/about" },
+        { "@type": "ListItem", "position": 2, "name": "Programs", "url": "https://samattafoundation.or.tz/programs" },
+        { "@type": "ListItem", "position": 3, "name": "Gallery", "url": "https://samattafoundation.or.tz/#gallery" },
+        { "@type": "ListItem", "position": 4, "name": "Contact", "url": "https://samattafoundation.or.tz/contact" },
+        { "@type": "ListItem", "position": 5, "name": "Donate", "url": "https://samattafoundation.or.tz/donate" },
+        { "@type": "ListItem", "position": 6, "name": "Volunteer", "url": "https://samattafoundation.or.tz/volunteer" }
+      ]
+    }
+    </script>
   </head>
 
   <body>
